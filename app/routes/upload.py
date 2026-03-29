@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request
+from app.utilities.file_utils import validate_file
 
 upload = Blueprint("upload", __name__)
 
@@ -8,10 +9,12 @@ def upload_page():
     if request.method == "POST":
         file = request.files.get("cv")
 
-        if not file:
-            # Implement error pages later
-            return "No file uploaded"
+        is_valid, message = validate_file(file)
 
-        return f"Received file: {file.filename}"
+        if not is_valid:
+            return message
+
+        return f"Successfully received file: {file.filename}"
+
     if request.method == "GET":
         return render_template("upload.html")

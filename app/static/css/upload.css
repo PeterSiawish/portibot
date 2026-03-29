@@ -1,0 +1,13 @@
+h1,
+p {
+  text-align: center;
+}
+
+form {
+  margin-top: 5em;
+}
+
+form * {
+  display: block;
+  margin: 0 auto;
+}
