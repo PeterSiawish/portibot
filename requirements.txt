@@ -1,0 +1,1 @@
+Remember to pip freeze > requirements.txt when you have everything installed.

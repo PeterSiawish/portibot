@@ -1,0 +1,23 @@
+# Python 
+__pycache__/
+*.py[cod]
+
+# Testing
+.pytest_cache/
+
+# Logging
+*.log
+
+# IDE files
+.vscode/
+
+# Virtual Environment
+.venv/
+
+# Instance Folder
+instance/
+
+# .env Variables
+.env
+*.env
+
