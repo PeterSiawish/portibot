@@ -21,3 +21,5 @@ instance/
 .env
 *.env
 
+# Ignore temporary file uploads
+uploads/
