@@ -12,7 +12,25 @@
   method="post"
   enctype="multipart/form-data"
 >
-  <input type="file" name="cv" accept=".pdf,.doc,.docx" required />
-  <input type="submit" value="Upload" />
+  <label for="role">Select your desired role:</label>
+  <select name="role" id="role" required>
+    <option value="" disabled selected>--- Choose a role ---</option>
+    <option value="backend">Backend Developer</option>
+    <option value="frontend">Frontend Developer</option>
+    <option value="fullstack">Full Stack Developer</option>
+    <option value="game_dev">Game Developer</option>
+    <option value="data_scientist">Data Scientist</option>
+    <option value="ai_ml">AI / Machine Learning Engineer</option>
+    <option value="devops">DevOps Engineer</option>
+    <option value="mobile">Mobile Developer</option>
+    <option value="auto">Auto-Detect from CV</option>
+  </select>
+  <small>
+    Not sure of a role? Choose 'Auto-Detect from CV' and we'll analyse your CV
+    objectively and recommend some relevant roles for you!
+  </small>
+  <label for="cv">Attach your CV:</label>
+  <input id="cv" type="file" name="cv" accept=".pdf,.doc,.docx" required />
+  <button type="submit">Upload</button>
 </form>
 {% endblock %}

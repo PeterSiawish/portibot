@@ -4,10 +4,10 @@ p {
 }
 
 form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
   margin-top: 5em;
-}
-
-form * {
-  display: block;
-  margin: 0 auto;
 }

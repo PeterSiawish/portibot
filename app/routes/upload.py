@@ -12,6 +12,7 @@ upload = Blueprint("upload", __name__)
 def upload_page():
     if request.method == "POST":
         file = request.files.get("cv")
+        role = request.form.get("role")
 
         is_valid, message = validate_file(file)
 
@@ -26,7 +27,7 @@ def upload_page():
 
         text = clean_text(text)
 
-        return f"Successfully received file: {file.filename} => {text}"
+        return f"Successfully received file: {role} {file.filename} => {text}"
 
     if request.method == "GET":
         return render_template("upload.html")
