@@ -1,9 +1,10 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, current_app
 
 from app.utilities.cv_upload_utils import validate_file
 from app.services.file_services import save_file, delete_file
 from app.services.cv_services import extract_text
 from app.services.text_processing_service import clean_text
+from app.services.skill_extraction import extract_skills
 
 upload = Blueprint("upload", __name__)
 
@@ -27,7 +28,10 @@ def upload_page():
 
         text = clean_text(text)
 
-        return f"Successfully received file: {role} {file.filename} => {text}"
+        client = current_app.gemini_client
+        extracted_skills = extract_skills(text, client)
+
+        return f"Successfully received file: {file.filename} => {text} \n {extracted_skills}"
 
     if request.method == "GET":
         return render_template("upload.html")

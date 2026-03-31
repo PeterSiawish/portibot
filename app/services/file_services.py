@@ -10,7 +10,7 @@ def save_file(file):
     Returns the file path
     """
 
-    upload_folder = current_app.config["UPLOAD_FOLDER"]
+    upload_folder = current_app.config.get("UPLOAD_FOLDER")
 
     # Ensure upload folder exists
     os.makedirs(upload_folder, exist_ok=True)
