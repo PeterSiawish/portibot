@@ -22,4 +22,4 @@ instance/
 *.env
 
 # Ignore temporary file uploads
-uploads/
+cv_uploads/

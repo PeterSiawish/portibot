@@ -16,7 +16,7 @@ def upload_page():
         is_valid, message = validate_file(file)
 
         if not is_valid:
-            return message
+            return render_template("error.html", message=message)
 
         file_path = save_file(file)
 
