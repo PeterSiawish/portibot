@@ -1,33 +1,51 @@
-from typing import List
+from typing import List, Literal
 from pydantic import BaseModel, Field
 
 
-# The following classes define the expected structure of the JSON response from the Gemini API.
-class Project(BaseModel):
-    title: str
-    tech_stack: List[str]
-    core_features: List[str] = Field(description="5-10 word summary of the system")
+# The following Pydantic classes define the expected structure of the JSON response from the Gemini API.
+class TechnicalSkills(BaseModel):
+    languages: List[str] = Field(
+        default_factory=list,
+        description="Programming languages only (e.g., Python, TypeScript).",
+    )
+    frameworks: List[str] = Field(
+        default_factory=list,
+        description="Web or application frameworks (e.g., Flask, React, Django).",
+    )
+    libraries: List[str] = Field(
+        default_factory=list,
+        description="Software libraries and packages (e.g., NumPy, Redux, OpenCV).",
+    )
+    databases: List[str] = Field(
+        default_factory=list,
+        description="Database management systems (e.g., PostgreSQL, MongoDB).",
+    )
+    tools_platforms: List[str] = Field(
+        default_factory=list,
+        description="DevOps tools, cloud providers, and version control (e.g., AWS, Docker, Git).",
+    )
+    concepts: List[str] = Field(
+        default_factory=list,
+        description="High-level technical methodologies or architectural patterns (e.g., Microservices, OOP, RESTful APIs).",
+    )
 
 
-class TechSkills(BaseModel):
-    languages: List[str]
-    frameworks: List[str]
-    libraries: List[str]
-    databases: List[str]
-    tools_platforms: List[str]
-    concepts: List[str]
-
-
-class SoftSkills(BaseModel):
-    interpersonal: List[str]
-    methodologies: List[str]
-
-
-class CVData(BaseModel):
-    name: str
-    technical_skills: TechSkills
-    soft_skills: SoftSkills
-    projects_brief: List[Project]
+class ProfessionalProfile(BaseModel):
+    technical_skills: TechnicalSkills
+    soft_skills: List[str] = Field(
+        default_factory=list,
+        description="Interpersonal and professional qualities (e.g., Leadership, Agile, Communication).",
+    )
+    experience_level: Literal["Entry", "Mid", "Senior", "Lead", "Not Specified"] = (
+        Field(
+            default="Not Specified",
+            description="The seniority level mentioned or inferred from the content.",
+        )
+    )
+    responsibilities: List[str] = Field(
+        default_factory=list,
+        description="Detailed bullet points describing work history, duties, and achievements.",
+    )
 
 
 def extract_skills(text, client):
@@ -44,7 +62,7 @@ def extract_skills(text, client):
         contents=prompt,
         config={
             "response_mime_type": "application/json",
-            "response_schema": CVData,
+            "response_schema": ProfessionalProfile,
         },
     )
 
