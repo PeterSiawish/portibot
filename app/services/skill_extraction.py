@@ -1,4 +1,4 @@
-from app.models.cv_profile import ProfessionalProfile
+from app.models.cv_profile import CVProfile
 
 
 def extract_skills(text, client):
@@ -15,7 +15,7 @@ def extract_skills(text, client):
         contents=prompt,
         config={
             "response_mime_type": "application/json",
-            "response_schema": ProfessionalProfile,
+            "response_schema": CVProfile,
         },
     )
 
