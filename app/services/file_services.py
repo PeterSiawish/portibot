@@ -5,11 +5,6 @@ from werkzeug.utils import secure_filename
 
 
 def save_file(file):
-    """
-    Saves the uploaded file with a unique name
-    Returns the file path
-    """
-
     upload_folder = current_app.config.get("UPLOAD_FOLDER")
 
     # Ensure upload folder exists
@@ -26,8 +21,5 @@ def save_file(file):
 
 
 def delete_file(file_path):
-    """
-    Deletes file after processing
-    """
     if os.path.exists(file_path):
         os.remove(file_path)

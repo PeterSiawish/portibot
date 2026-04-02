@@ -16,9 +16,7 @@ def allowed_file(filename):
 
 
 def validate_file_size(file):
-    """
-    Check if file size is within limit
-    """
+
     # Move cursor to end of file
     file.seek(0, os.SEEK_END)
     size = file.tell()
@@ -30,11 +28,6 @@ def validate_file_size(file):
 
 
 def validate_file(file):
-    """
-    Full validation (extension + size + existence)
-    Returns (is_valid, message)
-    """
-
     if not file:
         return False, "No file uploaded"
 

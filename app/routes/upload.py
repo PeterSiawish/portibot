@@ -5,6 +5,7 @@ from app.services.file_services import save_file, delete_file
 from app.services.cv_services import extract_text
 from app.services.text_processing_service import clean_text
 from app.services.skill_extraction import extract_skills
+from app.services.job_service import load_job_data
 
 upload = Blueprint("upload", __name__)
 
@@ -32,9 +33,16 @@ def upload_page():
         extracted_skills = extract_skills(text, client)
 
         if role != "auto":
+            try:
+                job_data = load_job_data(role)
+            except ValueError as error:
+                return render_template("error.html", message=error)
+            # results = compare(extracted_skills, job_data)
+        else:
+            # implement 'auto' logic later
             ...
 
-        return f"Successfully received file: {file.filename} ==> {extracted_skills}"
+        return f"Successfully received file: {file.filename}//{job_data}//{extracted_skills}"
 
     if request.method == "GET":
         return render_template("upload.html")
