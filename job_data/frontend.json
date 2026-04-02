@@ -1,0 +1,61 @@
+{
+  "technical_skills": {
+    "languages": [
+      "JavaScript",
+      "HTML5",
+      "CSS3",
+      "Python",
+      "Java",
+      "Swift",
+      "Kotlin",
+      "Objective-C"
+    ],
+    "frameworks": ["React", "Angular", "Vue.js", "Next.js", "Node.js"],
+    "libraries": [],
+    "databases": [],
+    "tools_platforms": ["Git", "CI/CD tools", "DevOps workflows"],
+    "concepts": [
+      "Responsive design and cross-browser compatibility",
+      "Accessibility and usability best practices",
+      "Component-based architecture and reusable UI patterns",
+      "API integration and frontend-backend collaboration",
+      "Testing strategies including unit, integration, and end-to-end testing",
+      "Performance optimization and debugging techniques",
+      "Version control workflows and CI/CD processes",
+      "Cloud-native environments and modern web application architecture",
+      "Core computer science and programming principles",
+      "End-to-end web application development lifecycle",
+      "Fundamental web technologies including HTTP, DOM, SSL, and web servers",
+      "Writing maintainable, testable, and performant code",
+      "Software development workflows and best practices"
+    ]
+  },
+  "soft_skills": [
+    "Strong communication and collaboration with cross-functional teams including designers, backend engineers, and stakeholders",
+    "Problem-solving and analytical thinking in debugging and optimisation tasks",
+    "Ability to mentor junior developers and support team development",
+    "Ability to communicate technical decisions, trade-offs, and solutions to clients and stakeholders",
+    "Adaptability and willingness to learn new front-end technologies in a rapidly evolving environment",
+    "Clear and effective communication within development teams",
+    "Proactive attitude and strong work ethic",
+    "Willingness to learn and research new technologies",
+    "Strong interpersonal skills and teamwork"
+  ],
+  "responsibilities": [
+    "Develop high-quality, responsive, and accessible front-end interfaces using modern JavaScript frameworks.",
+    "Translate UI/UX designs into functional user experiences while ensuring cross-browser compatibility and adherence to design guidelines.",
+    "Collaborate with designers, backend engineers, QA, and DevOps teams to deliver end-to-end solutions.",
+    "Build reusable components and maintain clean, well-structured codebases.",
+    "Perform testing, debugging, and performance optimisation to ensure smooth user experiences.",
+    "Participate in requirements analysis and contribute to design and solution discussions.",
+    "Contribute to version control workflows and CI/CD processes using Git-based tooling.",
+    "Stay up to date with emerging front-end technologies and apply them appropriately.",
+    "Lead front-end development on complex projects and define architecture and coding standards.",
+    "Mentor junior and mid-level developers and guide development workflows and testing strategies.",
+    "Communicate technical decisions and influence planning and technical strategy with stakeholders.",
+    "Write maintainable, testable, and performant software as part of a development team.",
+    "Participate in code reviews and perform extensive testing to ensure high-quality software delivery.",
+    "Research new technologies and share knowledge with the team.",
+    "Assist in the development of web or mobile applications within a collaborative team environment."
+  ]
+}

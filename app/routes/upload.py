@@ -31,7 +31,10 @@ def upload_page():
         client = current_app.gemini_client
         extracted_skills = extract_skills(text, client)
 
-        return f"Successfully received file: {file.filename} => {text} \n {extracted_skills}"
+        if role != "auto":
+            ...
+
+        return f"Successfully received file: {file.filename} ==> {extracted_skills}"
 
     if request.method == "GET":
         return render_template("upload.html")
