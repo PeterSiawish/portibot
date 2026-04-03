@@ -1,5 +1,6 @@
 from flask import Flask
 from google import genai
+from sentence_transformers import SentenceTransformer
 
 # Import all blueprints
 from app.routes.home import home
@@ -12,6 +13,7 @@ def create_app():
     app.config.from_pyfile("config.py")
 
     app.gemini_client = genai.Client(api_key=app.config.get("GEMINI_API_KEY"))
+    app.embedding_model = SentenceTransformer(app.config.get("EMBEDDING_MODEL_PATH"))
 
     app.register_blueprint(home)
     app.register_blueprint(upload)

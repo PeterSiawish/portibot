@@ -6,6 +6,7 @@ from app.services.cv_services import extract_text
 from app.services.text_processing_service import clean_text
 from app.services.skill_extraction import extract_skills
 from app.services.job_service import load_job_data
+from app.services.skill_comparison import full_comparison
 
 upload = Blueprint("upload", __name__)
 
@@ -30,19 +31,22 @@ def upload_page():
         text = clean_text(text)
 
         client = current_app.gemini_client
-        extracted_skills = extract_skills(text, client)
+        cv_data = extract_skills(text, client)
 
         if role != "auto":
             try:
                 job_data = load_job_data(role)
             except ValueError as error:
                 return render_template("error.html", message=error)
-            # results = compare(extracted_skills, job_data)
+
+            results = full_comparison(
+                cv_data, job_data, model=current_app.embedding_model
+            )
         else:
             # implement 'auto' logic later
             ...
 
-        return f"Successfully received file: {file.filename}//{job_data}//{extracted_skills}"
+        return f"Successfully received file: {file.filename}<hr>{job_data}<hr>{cv_data}<hr>{results}"
 
     if request.method == "GET":
         return render_template("upload.html")
