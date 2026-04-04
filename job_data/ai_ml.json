@@ -1,0 +1,49 @@
+{
+  "technical_skills": {
+    "languages": ["Python", "SQL", "R"],
+    "frameworks": ["scikit-learn", "TensorFlow", "PyTorch"],
+    "libraries": ["Pandas", "NumPy", "Matplotlib", "Seaborn", "Transformers"],
+    "databases": ["PostgreSQL", "MySQL"],
+    "tools_platforms": [
+      "Git",
+      "GitHub",
+      "Jupyter Notebook",
+      "Google Colab",
+      "Docker"
+    ],
+    "concepts": [
+      "Machine learning model training and evaluation",
+      "Supervised and unsupervised learning techniques",
+      "Data preprocessing and feature engineering",
+      "Working with structured and unstructured data",
+      "Model evaluation metrics (accuracy, precision, recall, F1-score)",
+      "Overfitting, underfitting, and model validation",
+      "Basic deep learning concepts",
+      "Introduction to natural language processing (NLP)",
+      "Working with pre-trained models (e.g., transformers)",
+      "Data visualisation and exploratory data analysis",
+      "Basic understanding of Large Language Models (LLMs)",
+      "Version control using Git"
+    ]
+  },
+  "soft_skills": [
+    "Strong analytical and problem-solving skills",
+    "Curiosity and willingness to experiment with data and models",
+    "Ability to learn new tools and techniques quickly",
+    "Effective communication of technical findings",
+    "Collaboration with engineers and stakeholders",
+    "Attention to detail in data and model performance"
+  ],
+  "responsibilities": [
+    "Develop and train machine learning models on real-world datasets",
+    "Clean, preprocess, and analyse data for modelling tasks",
+    "Evaluate model performance using appropriate metrics",
+    "Apply machine learning techniques to solve practical problems",
+    "Experiment with different algorithms and improve model accuracy",
+    "Work with pre-trained models and basic NLP tasks",
+    "Visualise data and present insights clearly",
+    "Collaborate with team members to deliver AI-based features",
+    "Document experiments, results, and methodologies",
+    "Continuously learn and apply new AI/ML techniques"
+  ]
+}

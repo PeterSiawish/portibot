@@ -4,6 +4,9 @@ from .base import TechnicalSkills
 
 
 class CVProfile(BaseModel):
+    name: str = Field(
+        description="The full name of the CV owner.",
+    )
     technical_skills: TechnicalSkills
     soft_skills: List[str] = Field(
         default_factory=list,

@@ -1,0 +1,51 @@
+{
+  "technical_skills": {
+    "languages": ["Python", "Bash", "PowerShell"],
+    "frameworks": [],
+    "libraries": [],
+    "databases": [],
+    "tools_platforms": [
+      "Git",
+      "GitHub",
+      "Linux",
+      "Docker",
+      "GitHub Actions",
+      "Jenkins",
+      "AWS",
+      "Azure"
+    ],
+    "concepts": [
+      "Continuous Integration and Continuous Deployment (CI/CD)",
+      "Basic cloud computing concepts (IaaS, PaaS)",
+      "Containerisation using Docker",
+      "Version control using Git",
+      "Basic infrastructure automation",
+      "Monitoring and logging fundamentals",
+      "Linux system basics and command line usage",
+      "Networking basics (HTTP, DNS)",
+      "Debugging build and deployment issues",
+      "Automation using scripts",
+      "Basic security best practices"
+    ]
+  },
+  "soft_skills": [
+    "Strong problem-solving and troubleshooting mindset",
+    "Effective communication with developers and team members",
+    "Willingness to learn new tools and technologies",
+    "Attention to detail in system reliability",
+    "Ability to work collaboratively in a team environment",
+    "Time management and ability to handle tasks under pressure"
+  ],
+  "responsibilities": [
+    "Assist in building and maintaining CI/CD pipelines",
+    "Support deployment of applications to cloud environments",
+    "Write scripts to automate routine tasks",
+    "Monitor applications and systems for performance issues",
+    "Troubleshoot build, deployment, and runtime errors",
+    "Collaborate with developers to improve deployment workflows",
+    "Use Docker to containerise applications",
+    "Maintain basic infrastructure configurations",
+    "Document processes and system configurations",
+    "Continuously learn and improve DevOps practices"
+  ]
+}

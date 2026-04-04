@@ -1,0 +1,48 @@
+{
+  "technical_skills": {
+    "languages": ["C++", "C#", "Python", "GDScript"],
+    "frameworks": ["Unity", "Godot"],
+    "libraries": ["OpenGL"],
+    "databases": [],
+    "tools_platforms": [
+      "Git",
+      "GitHub",
+      "Unity Editor",
+      "Godot Editor",
+      "Visual Studio",
+      "Linux"
+    ],
+    "concepts": [
+      "Gameplay programming and mechanics implementation",
+      "Object-Oriented Programming (OOP) principles",
+      "Game loops and event-driven programming",
+      "Basic game physics and collision detection",
+      "Debugging and testing gameplay systems",
+      "Performance optimisation basics",
+      "Working with game engines and editors",
+      "Basic mathematics for game development (vectors, physics)",
+      "Version control using Git",
+      "Modular and maintainable code design"
+    ]
+  },
+  "soft_skills": [
+    "Strong problem-solving and logical thinking",
+    "Collaboration with designers, artists, and developers",
+    "Creativity in gameplay design and implementation",
+    "Attention to detail in gameplay behaviour and performance",
+    "Willingness to learn new tools and engines",
+    "Ability to work in a team-based development environment"
+  ],
+  "responsibilities": [
+    "Develop gameplay features and mechanics using game engines",
+    "Write scripts and code for player interactions and game systems",
+    "Debug and fix gameplay issues and bugs",
+    "Collaborate with designers and artists to implement game features",
+    "Test and optimise game performance across target platforms",
+    "Use version control systems for collaborative development",
+    "Work within game engines such as Unity or Godot",
+    "Contribute to maintaining clean and organised codebases",
+    "Participate in team discussions and iterative development",
+    "Continuously learn and improve game development skills"
+  ]
+}

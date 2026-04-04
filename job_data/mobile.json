@@ -1,0 +1,50 @@
+{
+  "technical_skills": {
+    "languages": ["Swift", "Kotlin", "Dart", "JavaScript", "TypeScript"],
+    "frameworks": ["SwiftUI", "Jetpack Compose", "React Native", "Flutter"],
+    "libraries": [],
+    "databases": ["Firebase"],
+    "tools_platforms": [
+      "Android Studio",
+      "Xcode",
+      "Git",
+      "GitHub",
+      "Firebase",
+      "CI/CD basics"
+    ],
+    "concepts": [
+      "Mobile application development for iOS and Android",
+      "Cross-platform development concepts",
+      "Responsive and adaptive UI design",
+      "Mobile application architecture (MVC, MVVM basics)",
+      "API integration and networking",
+      "State management basics",
+      "App lifecycle management",
+      "Asynchronous programming",
+      "Debugging and testing mobile applications",
+      "Version control using Git",
+      "Basic mobile security practices",
+      "Working with device features (camera, storage, sensors)"
+    ]
+  },
+  "soft_skills": [
+    "Strong problem-solving and logical thinking",
+    "Effective communication within development teams",
+    "Collaboration with designers and developers",
+    "Willingness to learn new mobile technologies",
+    "Attention to detail in user experience",
+    "Time management and ability to meet deadlines"
+  ],
+  "responsibilities": [
+    "Develop and maintain mobile applications for iOS and Android",
+    "Implement user interfaces using native or cross-platform frameworks",
+    "Integrate mobile apps with backend APIs",
+    "Debug and fix issues across different devices and screen sizes",
+    "Write clean, maintainable, and well-structured code",
+    "Collaborate with designers and developers to deliver features",
+    "Test applications to ensure usability and performance",
+    "Use Git for version control and team collaboration",
+    "Participate in Agile development processes",
+    "Continuously learn and improve mobile development skills"
+  ]
+}

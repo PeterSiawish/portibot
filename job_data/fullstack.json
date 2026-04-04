@@ -1,0 +1,53 @@
+{
+  "technical_skills": {
+    "languages": ["JavaScript", "TypeScript", "Python", "Java", "SQL", "PHP"],
+    "frameworks": [
+      "React",
+      "Vue",
+      "Next.js",
+      "Node.js",
+      "Express.js",
+      "Django",
+      "Spring Boot"
+    ],
+    "libraries": ["Axios", "Bootstrap", "Tailwind CSS"],
+    "databases": ["MySQL", "PostgreSQL", "MongoDB"],
+    "tools_platforms": ["Git", "GitHub", "Docker", "CI/CD basics", "Postman"],
+    "concepts": [
+      "Full-stack web development (frontend and backend integration)",
+      "Building and consuming RESTful APIs",
+      "CRUD application development",
+      "Responsive design and basic frontend UX principles",
+      "Server-side development and routing",
+      "Relational and NoSQL database fundamentals",
+      "Authentication and authorization basics (JWT, sessions)",
+      "Client-server architecture",
+      "Debugging across frontend and backend",
+      "Basic testing (unit and integration)",
+      "Version control using Git",
+      "Working with HTTP, JSON, and web requests"
+    ]
+  },
+  "soft_skills": [
+    "Effective communication within cross-functional teams",
+    "Collaboration with designers and backend/frontend developers",
+    "Problem-solving across both frontend and backend issues",
+    "Willingness to learn and adapt to new technologies",
+    "Time management and ability to handle multiple tasks",
+    "Attention to detail in both UI and backend logic"
+  ],
+  "responsibilities": [
+    "Develop and maintain full-stack web applications",
+    "Build user interfaces using modern JavaScript frameworks",
+    "Develop backend APIs and server-side logic",
+    "Integrate frontend components with backend services",
+    "Design and interact with databases for application data",
+    "Implement authentication and basic security features",
+    "Write clean, maintainable, and reusable code",
+    "Debug and resolve issues across the full stack",
+    "Participate in code reviews and apply feedback",
+    "Test application functionality to ensure reliability",
+    "Use Git for version control and collaboration",
+    "Work with senior developers to improve features and performance"
+  ]
+}

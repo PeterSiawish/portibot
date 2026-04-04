@@ -64,7 +64,7 @@ def compare_category(model, cv_list, job_list, category):
             cat_results["missing"].append(
                 {
                     "category": category,
-                    "skill": job_skill,
+                    "missing_skill": job_skill,
                     "score": round(best_score, 2),
                 }
             )
@@ -97,13 +97,13 @@ def full_comparison(cv_data, job_data, model):
     ]
 
     WEIGHTS = {
-        "languages": 0.20,
+        "languages": 0.15,
         "frameworks": 0.15,
-        "concepts": 0.15,
-        "libraries": 0.10,
+        "concepts": 0.225,
+        "libraries": 0.075,
         "databases": 0.10,
-        "tools_platforms": 0.05,
-        "soft_skills": 0.10,
+        "tools_platforms": 0.10,
+        "soft_skills": 0.05,
         "responsibilities": 0.15,
     }
 

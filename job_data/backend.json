@@ -1,0 +1,41 @@
+{
+  "technical_skills": {
+    "languages": ["Python", "Java", "JavaScript", "SQL"],
+    "frameworks": ["Spring Boot", "Flask", "FastAPI", "Express.js", "Django"],
+    "libraries": ["Hibernate", "SQLAlchemy"],
+    "databases": ["PostgreSQL", "MySQL", "MongoDB"],
+    "tools_platforms": ["Git", "GitHub", "Docker", "CI/CD basics", "Postman"],
+    "concepts": [
+      "RESTful API design and implementation",
+      "CRUD operations and backend logic development",
+      "Relational and non-relational database design",
+      "Authentication and authorization basics (JWT, sessions)",
+      "Error handling and logging",
+      "Basic software testing (unit testing)",
+      "Version control using Git",
+      "Client-server architecture",
+      "Basic security practices (input validation, sanitisation)",
+      "Working with JSON and HTTP protocols"
+    ]
+  },
+  "soft_skills": [
+    "Effective communication within development teams",
+    "Willingness to learn and adapt to new backend technologies",
+    "Problem-solving and debugging skills",
+    "Attention to detail in implementing backend logic",
+    "Time management and ability to meet deadlines",
+    "Collaboration with frontend developers and other team members"
+  ],
+  "responsibilities": [
+    "Develop and maintain backend services and APIs",
+    "Implement server-side logic and handle data processing",
+    "Design and interact with databases for storing and retrieving data",
+    "Integrate backend services with frontend applications",
+    "Write clean, maintainable, and testable code",
+    "Debug and resolve backend issues and bugs",
+    "Participate in code reviews and apply feedback",
+    "Test backend functionality to ensure reliability",
+    "Use Git for version control and collaboration",
+    "Work with senior developers to improve system design and performance"
+  ]
+}

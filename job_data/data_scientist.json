@@ -1,0 +1,50 @@
+{
+  "technical_skills": {
+    "languages": ["Python", "SQL", "R"],
+    "frameworks": ["scikit-learn"],
+    "libraries": ["Pandas", "NumPy", "Matplotlib", "Seaborn"],
+    "databases": ["PostgreSQL", "MySQL"],
+    "tools_platforms": [
+      "Jupyter Notebook",
+      "Google Colab",
+      "Git",
+      "Power BI",
+      "Tableau"
+    ],
+    "concepts": [
+      "Exploratory data analysis (EDA)",
+      "Statistical analysis and hypothesis testing",
+      "Data cleaning and preprocessing",
+      "Feature engineering",
+      "Supervised and unsupervised learning basics",
+      "Model evaluation metrics (accuracy, precision, recall, F1-score)",
+      "Data visualisation and storytelling",
+      "Working with structured datasets",
+      "Basic machine learning model building",
+      "Correlation, regression, and classification techniques",
+      "Communicating insights to stakeholders",
+      "Version control using Git"
+    ]
+  },
+  "soft_skills": [
+    "Ability to communicate insights clearly to non-technical audiences",
+    "Strong analytical and critical thinking skills",
+    "Curiosity and data-driven mindset",
+    "Attention to detail and data accuracy",
+    "Collaboration with cross-functional teams",
+    "Problem-solving using data",
+    "Ability to present findings and tell a story with data"
+  ],
+  "responsibilities": [
+    "Analyse datasets to extract meaningful insights",
+    "Clean and preprocess data for analysis and modelling",
+    "Perform exploratory data analysis and visualisation",
+    "Apply statistical methods to answer business questions",
+    "Build and evaluate basic machine learning models",
+    "Communicate findings through reports and dashboards",
+    "Collaborate with stakeholders to understand data requirements",
+    "Present insights to technical and non-technical audiences",
+    "Document analysis processes and results",
+    "Continuously learn and apply new data analysis techniques"
+  ]
+}
