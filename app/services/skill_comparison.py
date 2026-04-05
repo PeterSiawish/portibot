@@ -6,7 +6,7 @@ STRONG_THRESHOLD = 0.75
 PARTIAL_THRESHOLD = 0.5
 
 
-def compare_category(model, cv_list, job_list, category):
+def compare_category(cv_embeddings, job_embeddings, cv_list, job_list, category):
     """
     Compares a list of skills from the CV against a list of required skills from the Job.
     Returns the average score and a dictionary of matches categorized by strength.
@@ -26,18 +26,14 @@ def compare_category(model, cv_list, job_list, category):
             ],
         }
 
-    # 1. Vectorize everything at once for optimization
-    cv_embeddings = model.encode(cv_list)
-    job_embeddings = model.encode(job_list)
-
-    # 2. Calculate the similarity matrix (Shape: len(job_list) x len(cv_list))
+    # 1. Calculate the similarity matrix (Shape: len(job_list) x len(cv_list))
     # Each row 'i' represents a Job Skill compared against every CV Skill 'j'
     similarity_matrix = cosine_similarity(job_embeddings, cv_embeddings)
 
     cat_results = {"strong": [], "partial": [], "missing": []}
     scores = []
 
-    # 3. Analyze each job requirement
+    # 2. Analyze each job requirement
     for i, job_skill in enumerate(job_list):
         best_match_idx = np.argmax(similarity_matrix[i])
         best_score = float(similarity_matrix[i][best_match_idx])
@@ -73,7 +69,7 @@ def compare_category(model, cv_list, job_list, category):
     return avg_score, cat_results
 
 
-def full_comparison(cv_data, job_data, model):
+def full_comparison(cv_data, cv_embeddings, job_data, job_embeddings):
     """
     Orchestrates the full comparison between CV and Job Description JSONs.
     """
@@ -114,11 +110,19 @@ def full_comparison(cv_data, job_data, model):
     tech_skills_cv = cv_data.get("technical_skills", {})
     tech_skills_job = job_data.get("technical_skills", {})
 
+    tech_vectors_cv = cv_embeddings.get("technical_skills", {})
+    tech_vectors_job = job_embeddings.get("technical_skills", {})
+
     for category in tech_categories:
         cv_list = tech_skills_cv.get(category, [])
         job_list = tech_skills_job.get(category, [])
 
-        score, cat_results = compare_category(model, cv_list, job_list, category)
+        cv_vectors = tech_vectors_cv.get(category, np.array([]))
+        job_vectors = tech_vectors_job.get(category, np.array([]))
+
+        score, cat_results = compare_category(
+            cv_vectors, job_vectors, cv_list, job_list, category
+        )
 
         results["category_scores"][category] = round(score, 2)
         results["strengths"].extend(cat_results["strong"])
@@ -132,7 +136,8 @@ def full_comparison(cv_data, job_data, model):
 
     # 2. Process Soft Skills
     soft_score, soft_results = compare_category(
-        model,
+        cv_embeddings.get("soft_skills", np.array([])),
+        job_embeddings.get("soft_skills", np.array([])),
         cv_data.get("soft_skills", []),
         job_data.get("soft_skills", []),
         "soft_skills",
@@ -150,7 +155,8 @@ def full_comparison(cv_data, job_data, model):
 
     # 3. Process Responsibilities
     resp_score, resp_results = compare_category(
-        model,
+        cv_embeddings.get("responsibilities", np.array([])),
+        job_embeddings.get("responsibilities", np.array([])),
         cv_data.get("responsibilities", []),
         job_data.get("responsibilities", []),
         "responsibilities",

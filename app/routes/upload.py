@@ -5,8 +5,11 @@ from app.services.file_services import save_file, delete_file
 from app.services.cv_services import extract_text
 from app.services.text_processing_service import clean_text
 from app.services.skill_extraction import extract_skills
-from app.services.job_service import load_job_data
 from app.services.skill_comparison import full_comparison
+from app.services.auto_service import run_auto_match
+from app.services.cv_embedding import embed_cv_data
+
+from app.services.job_embedding_cache import JOB_DATA, JOB_EMBEDDINGS
 
 upload = Blueprint("upload", __name__)
 
@@ -33,20 +36,22 @@ def upload_page():
         client = current_app.gemini_client
         cv_data = extract_skills(text, client)
 
+        embedded_cv_data = embed_cv_data(cv_data, model=current_app.embedding_model)
+
         if role != "auto":
-            try:
-                job_data = load_job_data(role)
-            except ValueError as error:
-                return render_template("error.html", message=error)
+            embedded_job_data = JOB_EMBEDDINGS[role]
+            job_data = JOB_DATA[role]
 
             results = full_comparison(
-                cv_data, job_data, model=current_app.embedding_model
+                cv_data, embedded_cv_data, job_data, embedded_job_data
             )
         else:
-            # implement 'auto' logic later
-            ...
+            results = run_auto_match(cv_data, model=current_app.embedding_model)
+            return (
+                f"Successfully received file: {file.filename}<hr>{cv_data}<hr>{results}"
+            )
 
-        return f"Successfully received file: {file.filename}<hr>{job_data}<hr>{cv_data}<hr>{results}"
+        return f"Successfully received file: {file.filename}<hr>{JOB_DATA}<hr>{JOB_EMBEDDINGS}<hr>{results}<hr>{cv_data}<hr>{embedded_cv_data}"
 
     if request.method == "GET":
         return render_template("upload.html")
