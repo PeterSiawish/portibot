@@ -1,39 +1,26 @@
-import os, json
-from flask import current_app
 from app.services.skill_comparison import full_comparison
 
-DEFINED_ROLES = [
-    "ai_ml",
-    "frontend",
-    "backend",
-    "data_scientist",
-    "devops",
-    "fullstack",
-    "game_dev",
-    "mobile",
-]
 
-
-def run_auto_match(cv_data, model):
+def run_auto_match(cv_data, cv_embeddings, job_data, job_embeddings):
     results = []
 
-    # Path to your job_data folder (using your config logic)
-    job_data_path = current_app.config.get("JOB_DATA_DIR")
+    for role in job_data.keys():
+        if role not in job_data or role not in job_embeddings:
+            continue
 
-    for role in DEFINED_ROLES:
-        file_path = os.path.join(job_data_path, f"{role}.json")
-
-        with open(file_path, "r") as f:
-            job_data = json.load(f)
+        role_data = job_data[role]
+        role_data_embedding = job_embeddings[role]
 
         # Run the existing comparison
-        comparison = full_comparison(cv_data, job_data, model)
+        comparison = full_comparison(
+            cv_data, cv_embeddings, role_data, role_data_embedding
+        )
 
         results.append(
             {
                 "role": role,
                 "score": comparison["overall_score"],
-                # "details": comparison,
+                "details": comparison,
             }
         )
 

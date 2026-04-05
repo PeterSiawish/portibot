@@ -45,13 +45,14 @@ def upload_page():
             results = full_comparison(
                 cv_data, embedded_cv_data, job_data, embedded_job_data
             )
+
+            return f"Successfully received file: {file.filename}<hr>{cv_data}<hr>{job_data}<hr>{results}"
         else:
-            results = run_auto_match(cv_data, model=current_app.embedding_model)
-            return (
-                f"Successfully received file: {file.filename}<hr>{cv_data}<hr>{results}"
+            results = run_auto_match(
+                cv_data, embedded_cv_data, JOB_DATA, JOB_EMBEDDINGS
             )
 
-        return f"Successfully received file: {file.filename}<hr>{JOB_DATA}<hr>{JOB_EMBEDDINGS}<hr>{results}<hr>{cv_data}<hr>{embedded_cv_data}"
+            return f"Successfully received file: {file.filename}<hr>{cv_data}<hr>{results}<hr>{JOB_DATA}"
 
     if request.method == "GET":
         return render_template("upload.html")
