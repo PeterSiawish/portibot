@@ -9,6 +9,7 @@ from app.services.skill_comparison import full_comparison
 from app.services.auto_service import run_auto_match
 from app.services.cv_embedding import embed_cv_data
 from app.services.evaluation_service import evaluate_role, evaluate_auto
+from app.services.portfolio_generation import generate_portfolio
 
 from app.services.job_embedding_cache import JOB_DATA, JOB_EMBEDDINGS
 
@@ -48,15 +49,16 @@ def upload_page():
             )
 
             evaluation = evaluate_role(results, gemini_client)
-
-            return f"Successfully received file: {file.filename}<hr>{cv_data}<hr>{job_data}<hr>{results}<hr>{evaluation}"
         else:
             results = run_auto_match(
                 cv_data, embedded_cv_data, JOB_DATA, JOB_EMBEDDINGS
             )
 
             evaluation = evaluate_auto(results, gemini_client)
-            return f"Successfully received file: {file.filename}<hr>{cv_data}<hr>{results}<hr>{evaluation}"
+
+        website = generate_portfolio(text, gemini_client)
+
+        return f"Successfully received file: {file.filename}<hr>{cv_data}<hr>{results}<hr>{evaluation}<hr>{website}"
 
     if request.method == "GET":
         return render_template("upload.html")
