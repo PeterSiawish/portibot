@@ -53,6 +53,9 @@ def generate_portfolio(text, client):
     - Good spacing and layout
     - Consistent color palette (no random colors)
     - Subtle hover effects
+    - Do NOT include any forms
+    - Do NOT include images
+
 
     STRUCTURE (MANDATORY):
     1. Hero section (name + short intro)

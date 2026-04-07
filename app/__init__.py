@@ -7,6 +7,7 @@ from app.services.job_embedding_cache import preload_jobs
 # Import all blueprints
 from app.routes.home import home
 from app.routes.upload import upload
+from app.routes.results import results
 
 
 def create_app():
@@ -22,5 +23,6 @@ def create_app():
 
     app.register_blueprint(home)
     app.register_blueprint(upload)
+    app.register_blueprint(results)
 
     return app
