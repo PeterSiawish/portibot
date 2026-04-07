@@ -13,7 +13,7 @@ def run_auto_match(cv_data, cv_embeddings, job_data, job_embeddings):
 
         # Run the existing comparison
         comparison = full_comparison(
-            cv_data, cv_embeddings, role_data, role_data_embedding
+            cv_data, cv_embeddings, role_data, role_data_embedding, role
         )
 
         results.append(

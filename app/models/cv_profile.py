@@ -1,6 +1,6 @@
 from typing import List, Literal
 from pydantic import BaseModel, Field
-from .base import TechnicalSkills
+from .profile_base import TechnicalSkills
 
 
 class CVProfile(BaseModel):
