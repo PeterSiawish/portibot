@@ -1,4 +1,4 @@
-from app.models.cv_profile import CVProfile
+from app.pydantic_schemas.profile_extraction_schemas.cv_profile import CVProfile
 
 
 def extract_skills(text, client):

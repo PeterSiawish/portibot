@@ -1,6 +1,6 @@
 from google.genai import types
-from app.models.role_evaluation import EvaluationSchema
-from app.models.auto_evaluation import AutoEvaluationSchema
+from app.pydantic_schemas.evaluation_schemas.role_evaluation import EvaluationSchema
+from app.pydantic_schemas.evaluation_schemas.auto_evaluation import AutoEvaluationSchema
 
 
 system_instructions = """
