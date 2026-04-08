@@ -82,7 +82,8 @@ def generate_portfolio(text, client):
     - Do NOT hallucinate sensitive personal data
     - Use placeholders where needed (e.g. email, GitHub)
     - Ensure the page looks realistic and job-ready
-    Avoid generic layouts. Make it visually appealing and structured.
+    - Avoid generic layouts. Make it visually appealing and structured.
+    - Operate exclusively on the provided data. You are strictly prohibited from hallucinating, 'enhancing,' or inventing skills, job titles, or dates that do not exist in the source text. If a section lacks sufficient information, leave it minimal or empty rather than fabricating details.
     """
 
     response = client.models.generate_content(
