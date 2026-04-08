@@ -1,0 +1,20 @@
+{% extends "base.html" %} {% block title %}Results{% endblock %} {% block head
+%}
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='css/preview_portfolio.css')}}"
+/>
+{% endblock %} {% block body %}
+<h2>
+  <a href="{{url_for('results.show_results', session_id=session_id)}}">
+    Go back to the results?
+  </a>
+  Website:
+</h2>
+<iframe
+  src="{{url_for('preview.portfolio_endpoint', session_id=session_id)}}"
+  frameborder="0"
+  width="100%"
+  height="800px"
+></iframe>
+{% endblock %}

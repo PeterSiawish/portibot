@@ -13,6 +13,7 @@ STRICT RULES:
 1. Output ONLY valid JSON (no markdown, no explanations)
 2. Follow the schema EXACTLY
 3. The HTML must be complete and functional
+4. Do NOT use Em Dashes
 
 DESIGN QUALITY:
 - Modern, clean UI

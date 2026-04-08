@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, current_app, redirect, url_for
 
 from app.utilities.cv_upload_utils import validate_file
-from app.utilities.temp_storage import create_session
+from app.utilities.session_handling import create_session
 from app.services.file_services import save_file, delete_file
 from app.services.cv_services import extract_text
 from app.services.text_processing_service import clean_text
@@ -59,7 +59,7 @@ def upload_page():
 
         website = generate_portfolio(text, gemini_client)
 
-        session_data = {"evaluation": evaluation, "website": website}
+        session_data = {"evaluation": evaluation, "website": website, "role": role}
 
         session_id = create_session(session_data)
 
