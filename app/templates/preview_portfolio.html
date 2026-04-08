@@ -10,11 +10,18 @@
     Go back to the results?
   </a>
   Website:
+  <a href="#website">Focus on ur website</a>
+  <a href="{{url_for('preview.download_portfolio', session_id=session_id)}}">
+    Download your website!
+  </a>
 </h2>
-<iframe
-  src="{{url_for('preview.portfolio_endpoint', session_id=session_id)}}"
-  frameborder="0"
-  width="100%"
-  height="800px"
-></iframe>
+<section id="website">
+  <iframe
+    src="{{url_for('preview.portfolio_endpoint', session_id=session_id)}}"
+    frameborder="0"
+    width="100%"
+    height="800px"
+  ></iframe>
+</section>
+
 {% endblock %}
