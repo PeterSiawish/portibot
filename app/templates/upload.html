@@ -5,9 +5,27 @@
   href="{{url_for('static', filename='css/upload.css')}}"
 />
 {% endblock %} {% block body %}
+<div
+  id="upload-loading"
+  class="upload-loading"
+  role="status"
+  aria-live="polite"
+  aria-hidden="true"
+  hidden
+>
+  <div class="upload-loading_card">
+    <div class="upload-loading_spinner" aria-hidden="true"></div>
+    <p class="upload-loading_title">Analysing your CV</p>
+    <p class="upload-loading_hint">
+      This usually takes about 20 to 30 seconds. Please keep this tab open.
+    </p>
+  </div>
+</div>
+
 <h1>Upload Your CV</h1>
 <p>Please upload your CV to receive feedback and improve your employability.</p>
 <form
+  id="upload-form"
   action="{{url_for('upload.upload_page')}}"
   method="post"
   enctype="multipart/form-data"
@@ -30,7 +48,15 @@
     objectively and recommend some relevant roles for you!
   </small>
   <label for="cv">Attach your CV:</label>
-  <input id="cv" type="file" name="cv" accept=".pdf,.doc,.docx" required />
-  <button type="submit">Upload</button>
+  <input id="cv" type="file" name="cv" accept=".pdf,.docx" required />
+  <p
+    id="upload-client-error"
+    class="upload-client-error"
+    role="alert"
+    tabindex="-1"
+    hidden
+  ></p>
+  <button type="submit" id="upload-submit">Upload</button>
 </form>
+<script src="{{url_for('static', filename='js/upload.js')}}"></script>
 {% endblock %}

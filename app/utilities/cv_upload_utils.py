@@ -1,6 +1,6 @@
 import os
 
-ALLOWED_EXTENSIONS = {"pdf", "doc", "docx"}
+ALLOWED_EXTENSIONS = {"pdf", "docx"}
 
 MAX_FILE_SIZE = 5 * 1024 * 1024  # 5 MB
 
@@ -35,7 +35,7 @@ def validate_file(file):
         return False, "No file selected"
 
     if not allowed_file(file.filename):
-        return False, "Invalid file type. Only PDF, DOC, DOCX allowed."
+        return False, "Invalid file type. Only PDF, DOCX allowed."
 
     if not validate_file_size(file):
         return False, "File too large. Max size is 5MB."

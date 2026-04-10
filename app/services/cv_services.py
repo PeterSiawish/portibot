@@ -3,14 +3,14 @@ from docx import Document
 
 
 def extract_text(file_path):
-    if file_path.endswith(".pdf"):
+    path_lower = file_path.lower()
+    if path_lower.endswith(".pdf"):
         return extract_pdf(file_path)
 
-    elif file_path.endswith(".docx"):
+    if path_lower.endswith(".docx"):
         return extract_docx(file_path)
 
-    else:
-        return "Something Went Wrong"
+    return None
 
 
 def extract_pdf(file_path):

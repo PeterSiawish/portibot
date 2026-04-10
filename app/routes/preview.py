@@ -23,7 +23,11 @@ def portfolio_endpoint(session_id):
     if not data:
         return render_template("error.html", message="Invalid Session.")
 
-    html = data["website"]["html_code"]
+    website = data.get("website")
+    html = website.get("html_code")
+
+    if not html:
+        return render_template("error.html", message="No portfolio available.")
 
     return html
 

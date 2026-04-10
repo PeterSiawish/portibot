@@ -29,41 +29,54 @@ def upload_page():
             return render_template("error.html", message=message)
 
         file_path = save_file(file)
+        try:
+            text = extract_text(file_path)
+            if text is None:
+                return render_template(
+                    "error.html",
+                    message="Unsupported file type after upload. Use PDF or DOCX.",
+                )
 
-        text = extract_text(file_path)
+            text = clean_text(text)
 
-        delete_file(file_path)
+            gemini_client = current_app.gemini_client
+            cv_data = extract_skills(text, gemini_client)
 
-        text = clean_text(text)
+            embedded_cv_data = embed_cv_data(cv_data, model=current_app.embedding_model)
 
-        gemini_client = current_app.gemini_client
-        cv_data = extract_skills(text, gemini_client)
+            if role != "auto":
+                embedded_job_data = JOB_EMBEDDINGS[role]
+                job_data = JOB_DATA[role]
 
-        embedded_cv_data = embed_cv_data(cv_data, model=current_app.embedding_model)
+                results = full_comparison(
+                    cv_data, embedded_cv_data, job_data, embedded_job_data, role
+                )
 
-        if role != "auto":
-            embedded_job_data = JOB_EMBEDDINGS[role]
-            job_data = JOB_DATA[role]
+                evaluation = evaluate_role(results, gemini_client)
+            else:
+                results = run_auto_match(
+                    cv_data, embedded_cv_data, JOB_DATA, JOB_EMBEDDINGS
+                )
 
-            results = full_comparison(
-                cv_data, embedded_cv_data, job_data, embedded_job_data, role
+                evaluation = evaluate_auto(results, gemini_client)
+
+            website = generate_portfolio(text, gemini_client)
+
+            session_data = {"evaluation": evaluation, "website": website, "role": role}
+
+            session_id = create_session(session_data)
+
+            return redirect(url_for("results.show_results", session_id=session_id))
+        except RuntimeError as e:
+            return render_template("error.html", message=str(e))
+        except Exception:
+            current_app.logger.exception("Upload pipeline failed")
+            return render_template(
+                "error.html",
+                message="Something went wrong while processing your CV. Please try again.",
             )
-
-            evaluation = evaluate_role(results, gemini_client)
-        else:
-            results = run_auto_match(
-                cv_data, embedded_cv_data, JOB_DATA, JOB_EMBEDDINGS
-            )
-
-            evaluation = evaluate_auto(results, gemini_client)
-
-        website = generate_portfolio(text, gemini_client)
-
-        session_data = {"evaluation": evaluation, "website": website, "role": role}
-
-        session_id = create_session(session_data)
-
-        return redirect(url_for("results.show_results", session_id=session_id))
+        finally:
+            delete_file(file_path)
 
     if request.method == "GET":
         return render_template("upload.html")

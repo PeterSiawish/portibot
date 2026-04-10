@@ -11,3 +11,75 @@ form {
   gap: 1em;
   margin-top: 5em;
 }
+
+body.upload-loading--active {
+  overflow: hidden;
+}
+
+.upload-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(40, 35, 30, 0.45);
+  backdrop-filter: blur(4px);
+}
+
+.upload-loading[hidden] {
+  display: none;
+}
+
+.upload-loading_card {
+  max-width: 22rem;
+  width: 100%;
+  padding: 2rem 1.75rem;
+  text-align: center;
+  background: #f1eed3;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.upload-loading_spinner {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 1.25rem;
+  border-radius: 50%;
+  border: 3px solid rgba(0, 0, 0, 0.08);
+  border-top-color: #5c4d3c;
+  animation: upload-spin 0.85s linear infinite;
+}
+
+.upload-loading_title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #2c2419;
+  margin-bottom: 0.5rem;
+}
+
+.upload-loading_hint {
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: #5c5348;
+  text-align: center;
+}
+
+@keyframes upload-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.upload-client-error {
+  margin: 0;
+  max-width: 28rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #8b2500;
+}
+
+.upload-client-error[hidden] {
+  display: none;
+}
