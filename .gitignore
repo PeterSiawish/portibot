@@ -14,9 +14,6 @@ __pycache__/
 # Virtual Environment
 .venv/
 
-# Instance Folder
-instance/
-
 # .env Variables
 .env
 *.env
