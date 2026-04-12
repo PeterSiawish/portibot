@@ -1,27 +1,140 @@
-{% extends "base.html" %} {% block title %}Results{% endblock %} {% block head
-%}
+{% extends "base.html" %} {% block title %}Portfolio Preview{% endblock %} {%
+block body_class %}preview{% endblock %} {% block footer %}{% endblock %} {%
+block head %}
 <link
   rel="stylesheet"
-  href="{{url_for('static', filename='css/preview_portfolio.css')}}"
+  href="{{ url_for('static', filename='css/preview_portfolio.css') }}"
 />
 {% endblock %} {% block body %}
-<h2>
-  <a href="{{url_for('results.show_results', session_id=session_id)}}">
-    Go back to the results?
-  </a>
-  Website:
-  <a href="#website">Focus on ur website</a>
-  <a href="{{url_for('preview.download_portfolio', session_id=session_id)}}">
-    Download your website!
-  </a>
-</h2>
-<section id="website">
-  <iframe
-    src="{{url_for('preview.portfolio_endpoint', session_id=session_id)}}"
-    frameborder="0"
-    width="100%"
-    height="800px"
-  ></iframe>
-</section>
 
+<div class="preview-toolbar">
+  <a
+    href="{{ url_for('results.show_results', session_id=session_id) }}"
+    class="preview-toolbar__back"
+  >
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <polyline points="15 18 9 12 15 6" />
+    </svg>
+    Results
+  </a>
+
+  <div class="preview-devices" role="group" aria-label="Preview device size">
+    <button
+      type="button"
+      class="preview-device-btn"
+      data-device="desktop"
+      aria-pressed="true"
+      title="Desktop"
+    >
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.75"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <rect x="2" y="3" width="20" height="14" rx="2" />
+        <line x1="8" y1="21" x2="16" y2="21" />
+        <line x1="12" y1="17" x2="12" y2="21" />
+      </svg>
+      <span class="preview-device-btn__label">Desktop</span>
+    </button>
+
+    <button
+      type="button"
+      class="preview-device-btn"
+      data-device="tablet"
+      aria-pressed="false"
+      title="Tablet"
+    >
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.75"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <rect x="4" y="2" width="16" height="20" rx="2" />
+        <circle cx="12" cy="18" r="1" />
+      </svg>
+      <span class="preview-device-btn__label">Tablet</span>
+    </button>
+
+    <button
+      type="button"
+      class="preview-device-btn"
+      data-device="mobile"
+      aria-pressed="false"
+      title="Mobile"
+    >
+      <svg
+        width="14"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.75"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <rect x="5" y="2" width="14" height="20" rx="2" />
+        <circle cx="12" cy="18" r="1" />
+      </svg>
+      <span class="preview-device-btn__label">Mobile</span>
+    </button>
+  </div>
+
+  <a
+    href="{{ url_for('preview.download_portfolio', session_id=session_id) }}"
+    class="btn btn--primary preview-toolbar__download"
+    download
+  >
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <polyline points="7 10 12 15 17 10" />
+      <line x1="12" y1="15" x2="12" y2="3" />
+    </svg>
+    Download
+  </a>
+</div>
+
+<div class="preview-stage">
+  <iframe
+    id="preview-iframe"
+    src="{{ url_for('preview.portfolio_endpoint', session_id=session_id) }}"
+    frameborder="0"
+    title="Your generated portfolio website"
+  ></iframe>
+</div>
+
+<script src="{{ url_for('static', filename='js/preview.js') }}"></script>
 {% endblock %}

@@ -1,19 +1,235 @@
-{% extends "base.html" %} {% block title %}Results{% endblock %} {% block head
-%}
+{% extends "base.html" %} {% block title %}Your Results{% endblock %} {% block
+body_class %}results{% endblock %} {% block head %}
 <link
   rel="stylesheet"
-  href="{{url_for('static', filename='css/results_role.css')}}"
+  href="{{ url_for('static', filename='css/results_role.css') }}"
 />
 {% endblock %} {% block body %}
-<h1>
-  This is the ROLE results page!
-  <a href="{{url_for('home.index')}}">Back Home?</a>
-</h1>
-<p>Here are your results:</p>
-<h2>Evaluation:</h2>
-<p>{{evaluation}}</p>
-<hr />
-<a href="{{url_for('preview.preview_portfolio', session_id=session_id)}}">
-  Preview your website!
-</a>
+<div class="results-page">
+  <section class="results-hero">
+    <div class="container results-hero__inner">
+      <div class="results-hero__text">
+        <span class="results-hero__eyebrow">Your Evaluation</span>
+        <h1 class="results-hero__title">Here's where you stand</h1>
+        <p class="results-hero__verdict">{{ evaluation.verdict }}</p>
+
+        <div class="results-hero__meta">
+          <span
+            class="badge badge--{{ 'success' if evaluation.readiness_level in ['Junior Ready'] else 'warning' if evaluation.readiness_level == 'Intern Ready' else 'accent' if evaluation.readiness_level == 'Mid-Level Transition' else 'danger' }}"
+          >
+            {{ evaluation.readiness_level }}
+          </span>
+        </div>
+      </div>
+
+      <div
+        class="results-score"
+        aria-label="Readiness score: {{ evaluation.readiness_score }} out of 100"
+      >
+        <svg
+          class="results-score__ring"
+          viewBox="0 0 120 120"
+          width="160"
+          height="160"
+        >
+          <circle class="results-score__track" cx="60" cy="60" r="50" />
+          <circle
+            class="results-score__fill"
+            cx="60"
+            cy="60"
+            r="50"
+            stroke-dasharray="314"
+            stroke-dashoffset="{{ 314 - (314 * evaluation.readiness_score / 100) }}"
+          />
+        </svg>
+        <div class="results-score__label">
+          <span class="results-score__number">
+            {{ evaluation.readiness_score }}
+          </span>
+          <span class="results-score__unit">/ 100</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container results-body">
+    <section class="results-section">
+      <div class="results-split">
+        <div>
+          <h2 class="results-section__title results-section__title--success">
+            <span class="results-section__title-icon" aria-hidden="true">
+              ▲
+            </span>
+            Top Strengths
+          </h2>
+          <div class="skill-list">
+            {% for skill in evaluation.top_strengths %}
+            <div class="skill-card">
+              <div class="skill-card__header">
+                <span class="skill-card__name">{{ skill.skill }}</span>
+                <span
+                  class="badge badge--{{ 'danger' if skill.importance_weight == 'Critical' else 'warning' if skill.importance_weight == 'Highly Desirable' else 'accent' }}"
+                >
+                  {{ skill.importance_weight }}
+                </span>
+              </div>
+              <p class="skill-card__context">{{ skill.industry_context }}</p>
+              <p class="skill-card__resource">
+                <span class="skill-card__resource-label">How to level up:</span>
+                {{ skill.learning_resource_type }}
+              </p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div>
+          <h2 class="results-section__title results-section__title--danger">
+            <span class="results-section__title-icon" aria-hidden="true">
+              ▼
+            </span>
+            Critical Gaps
+          </h2>
+          <div class="skill-list">
+            {% for skill in evaluation.critical_gaps %}
+            <div class="skill-card skill-card--gap">
+              <div class="skill-card__header">
+                <span class="skill-card__name">{{ skill.skill }}</span>
+                <span
+                  class="badge badge--{{ 'danger' if skill.importance_weight == 'Critical' else 'warning' if skill.importance_weight == 'Highly Desirable' else 'accent' }}"
+                >
+                  {{ skill.importance_weight }}
+                </span>
+              </div>
+              <p class="skill-card__context">{{ skill.industry_context }}</p>
+              <p class="skill-card__resource">
+                <span class="skill-card__resource-label">
+                  How to close this gap:
+                </span>
+                {{ skill.learning_resource_type }}
+              </p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="results-section">
+      <h2 class="results-section__title">
+        <span class="results-section__title-icon" aria-hidden="true">◆</span>
+        Bridge Project
+      </h2>
+      <p class="results-section__subtitle">
+        One project that closes multiple gaps at once.
+      </p>
+
+      <div class="card card--glow project-card">
+        <h3 class="project-card__title">
+          {{ evaluation.bridge_project.title }}
+        </h3>
+        <p class="project-card__description">
+          {{ evaluation.bridge_project.description }}
+        </p>
+        <div class="project-card__stack">
+          {% for tech in evaluation.bridge_project.technologies %}
+          <span class="badge badge--accent">{{ tech }}</span>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="results-section">
+      <h2 class="results-section__title">
+        <span class="results-section__title-icon" aria-hidden="true">→</span>
+        4-Week Roadmap to Interview Ready
+      </h2>
+      <p class="results-section__subtitle">
+        A chronological plan - start here, do it in order.
+      </p>
+
+      <ol class="roadmap" aria-label="4-week roadmap">
+        {% for step in evaluation.step_by_step_roadmap %}
+        <li class="roadmap__step">
+          <div class="roadmap__marker" aria-hidden="true">{{ loop.index }}</div>
+          <div class="roadmap__content">
+            <span class="roadmap__week">Week {{ loop.index }}</span>
+            <p class="roadmap__task">{{ step }}</p>
+          </div>
+        </li>
+        {% endfor %}
+      </ol>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="results-section">
+      <h2 class="results-section__title">
+        <span class="results-section__title-icon" aria-hidden="true">◈</span>
+        Market Positioning
+      </h2>
+      <p class="results-section__subtitle">
+        How you compare to other graduate candidates right now.
+      </p>
+
+      <div class="market-grid">
+        <div class="market-card">
+          <span class="market-card__label">Salary Readiness</span>
+          <p class="market-card__value">
+            {{ evaluation.market_positioning.salary_readiness }}
+          </p>
+        </div>
+
+        <div class="market-card market-card--highlight">
+          <span class="market-card__label">Your Edge</span>
+          <p class="market-card__value">
+            {{ evaluation.market_positioning.competitive_edge }}
+          </p>
+        </div>
+
+        <div class="market-card market-card--risk">
+          <span class="market-card__label">Hiring Risk</span>
+          <p class="market-card__value">
+            {{ evaluation.market_positioning.hiring_risk }}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="results-section results-closing">
+      <div class="advice-card card">
+        <span class="advice-card__label">Interview Tip</span>
+        <p class="advice-card__text">{{ evaluation.interview_advice }}</p>
+      </div>
+
+      <div class="final-thought">
+        <p class="final-thought__text">{{ evaluation.final_thought }}</p>
+      </div>
+    </section>
+
+    <section class="results-cta">
+      <div class="results-cta__inner card card--glow">
+        <div class="results-cta__text">
+          <h2 class="results-cta__title">Your portfolio is ready</h2>
+          <p class="results-cta__subtitle">
+            We've generated a portfolio website from your CV. Preview it, share
+            it, get hired.
+          </p>
+        </div>
+        <a
+          href="{{ url_for('preview.preview_portfolio', session_id=session_id) }}"
+          class="btn btn--primary btn--lg"
+        >
+          Preview your portfolio →
+        </a>
+      </div>
+    </section>
+  </div>
+</div>
 {% endblock %}

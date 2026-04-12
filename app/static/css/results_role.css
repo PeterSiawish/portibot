@@ -1,0 +1,438 @@
+.results-page {
+  padding-bottom: var(--space-20);
+}
+
+.results-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.results-section {
+  padding-block: var(--space-10);
+}
+
+.results-section__title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.results-section__title-icon {
+  font-size: 0.75rem;
+  color: var(--accent);
+}
+
+.results-section__title--success .results-section__title-icon {
+  color: var(--color-success);
+}
+.results-section__title--danger .results-section__title-icon {
+  color: var(--color-danger);
+}
+
+.results-section__subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: var(--space-6);
+}
+
+/* Hero */
+.results-hero {
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+  padding-block: var(--space-12) var(--space-10);
+  margin-bottom: var(--space-4);
+}
+
+.results-hero__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-10);
+}
+
+.results-hero__text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 640px;
+}
+
+.results-hero__eyebrow {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.results-hero__title {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.results-hero__verdict {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+.results-hero__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* Score ring */
+.results-score {
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.results-score__ring {
+  transform: rotate(-90deg);
+  overflow: visible;
+}
+
+.results-score__track {
+  fill: none;
+  stroke: var(--border-subtle);
+  stroke-width: 8;
+}
+
+.results-score__fill {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s ease;
+}
+
+.results-score__label {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.results-score__number {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--text-primary);
+}
+
+.results-score__unit {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: var(--space-1);
+}
+
+/* Strengths & gaps split layout */
+.results-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+}
+
+.skill-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.skill-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--color-success);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  transition: border-color var(--transition-base);
+}
+
+.skill-card--gap {
+  border-left-color: var(--color-danger);
+}
+
+.skill-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.skill-card__name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.skill-card__context {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.skill-card__resource {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.skill-card__resource-label {
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-right: var(--space-1);
+}
+
+/* Bridge project */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.project-card__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.project-card__description {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.project-card__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* Roadmap */
+.roadmap {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  position: relative;
+}
+
+/* Vertical connector line */
+.roadmap::before {
+  content: "";
+  position: absolute;
+  left: 19px;
+  top: 20px;
+  bottom: 20px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent), var(--border-subtle));
+}
+
+.roadmap__step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-5);
+  padding-block: var(--space-4);
+  position: relative;
+}
+
+.roadmap__marker {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--bg-card);
+  border: 2px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent);
+  position: relative;
+  z-index: 1;
+}
+
+.roadmap__content {
+  padding-top: var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.roadmap__week {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.roadmap__task {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Market positioning */
+.market-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+.market-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.market-card--highlight {
+  border-color: var(--color-success);
+  background-color: var(--color-success-subtle);
+}
+
+.market-card--risk {
+  border-color: rgba(248, 113, 113, 0.2);
+  background-color: var(--color-danger-subtle);
+}
+
+.market-card__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.market-card--highlight .market-card__label {
+  color: var(--color-success);
+}
+.market-card--risk .market-card__label {
+  color: var(--color-danger);
+}
+
+.market-card__value {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Closing */
+.results-closing {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.advice-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  border-left: 3px solid var(--accent);
+}
+
+.advice-card__label {
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.advice-card__text {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+.final-thought {
+  text-align: center;
+  padding-block: var(--space-4);
+}
+
+.final-thought__text {
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--text-muted);
+  max-width: 640px;
+  margin-inline: auto;
+  line-height: 1.8;
+}
+
+/* Portfolio CTA */
+.results-cta {
+  padding-top: var(--space-6);
+}
+
+.results-cta__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.results-cta__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.results-cta__title {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.results-cta__subtitle {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .results-split {
+    grid-template-columns: 1fr;
+  }
+
+  .market-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .results-hero__inner {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+
+  .results-cta__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .results-cta__inner .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

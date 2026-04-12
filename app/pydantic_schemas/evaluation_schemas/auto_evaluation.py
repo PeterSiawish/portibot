@@ -35,7 +35,9 @@ class CareerPivot(BaseModel):
 class AutoEvaluationSchema(BaseModel):
     # Overall Picture
     technical_archetype: str = Field(
-        description="A creative title for the candidate's current profile (e.g., 'Python-Centric API Architect' or 'Frontend-Leaning Generalist')."
+        description=(
+            "A formal, industry-standard professional title based on the candidate's core expertise. Examples: 'Junior Backend Engineer', 'Full-Stack Developer', 'Machine Learning Research Intern', or 'Software Engineer (DevOps focus)'. Avoid flowery language or creative metaphors."
+        )
     )
     executive_summary: str = Field(
         description="A deep-dive paragraph (5-6 sentences) synthesizing their overall marketability and current standing in the graduate job market."

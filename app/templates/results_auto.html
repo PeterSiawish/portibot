@@ -1,19 +1,216 @@
-{% extends "base.html" %} {% block title %}Results{% endblock %} {% block head
-%}
+{% extends "base.html" %} {% block title %}Your Results{% endblock %} {% block
+body_class %}results{% endblock %} {% block head %}
 <link
   rel="stylesheet"
-  href="{{url_for('static', filename='css/results_auto.css')}}"
+  href="{{ url_for('static', filename='css/results_auto.css') }}"
 />
 {% endblock %} {% block body %}
-<h1>
-  This is the AUTO results page!
-  <a href="{{url_for('home.index')}}">Back Home?</a>
-</h1>
-<p>Here are your results:</p>
-<h2>Evaluation:</h2>
-<p>{{evaluation}}</p>
-<hr />
-<a href="{{url_for('preview.preview_portfolio', session_id=session_id)}}">
-  Preview your website!
-</a>
+<div class="results-page">
+  <section class="results-hero">
+    <div class="container results-hero__inner">
+      <div class="results-hero__text">
+        <span class="results-hero__eyebrow">Auto-Detect Results</span>
+        <h1 class="results-hero__title">
+          {{ evaluation.technical_archetype }}
+        </h1>
+        <p class="results-hero__summary">{{ evaluation.executive_summary }}</p>
+        <div class="results-hero__meta">
+          <span class="results-hero__best-fit-label">Best fit:</span>
+          <span class="badge badge--success">
+            {{ evaluation.best_fit_role }}
+          </span>
+        </div>
+      </div>
+
+      <div class="results-hero__graphic" aria-hidden="true">
+        <span class="results-hero__initial">
+          {{ evaluation.technical_archetype[0] }}
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <div class="container results-body">
+    <section class="results-section">
+      <h2 class="results-section__title">
+        <span class="results-section__title-icon" aria-hidden="true">◈</span>
+        Role Compatibility Rankings
+      </h2>
+      <p class="results-section__subtitle">
+        How well your current skills align with each career path.
+      </p>
+
+      <div class="rankings-list">
+        {% for role in evaluation.top_competency_rankings %}
+        <div class="ranking-card card">
+          <div class="ranking-card__header">
+            <div class="ranking-card__meta">
+              <span class="ranking-card__position" aria-hidden="true">
+                {{ loop.index }}
+              </span>
+              <div>
+                <h3 class="ranking-card__role">{{ role.role }}</h3>
+                <p class="ranking-card__narrative">
+                  {{ role.match_narrative }}
+                </p>
+              </div>
+            </div>
+            <span class="ranking-card__score">
+              {{ (role.score * 100) | int }}%
+            </span>
+          </div>
+
+          <div
+            class="ranking-bar"
+            role="progressbar"
+            aria-valuenow="{{ (role.score * 100) | int }}"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-label="{{ role.role }} match score"
+          >
+            <div
+              class="ranking-bar__fill {% if role.score >= 0.7 %}ranking-bar__fill--high{% elif role.score >= 0.4 %}ranking-bar__fill--mid{% else %}ranking-bar__fill--low{% endif %}"
+              style="width: {{ (role.score * 100) | int }}%"
+            ></div>
+          </div>
+
+          <div class="ranking-card__footer">
+            <div class="ranking-card__overlaps">
+              <span class="ranking-card__footer-label">Key overlap</span>
+              <div class="ranking-card__tags">
+                {% for skill in role.key_overlap %}
+                <span class="badge badge--accent">{{ skill }}</span>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="ranking-card__blocker">
+              <span class="ranking-card__footer-label">Primary blocker</span>
+              <p class="ranking-card__blocker-text">
+                {{ role.primary_blocker }}
+              </p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="results-section">
+      <div class="results-split">
+        <div>
+          <h2 class="results-section__title results-section__title--success">
+            <span class="results-section__title-icon" aria-hidden="true">
+              ▲
+            </span>
+            Transferable Skills
+          </h2>
+          <div class="card synergy-card">
+            <p class="synergy-card__text">{{ evaluation.skill_synergy }}</p>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="results-section__title results-section__title--danger">
+            <span class="results-section__title-icon" aria-hidden="true">
+              ▼
+            </span>
+            Market Readiness Gaps
+          </h2>
+          <ul class="gap-list" aria-label="Market readiness gaps">
+            {% for gap in evaluation.market_readiness_gap %}
+            <li class="gap-item">
+              <span class="gap-item__dot" aria-hidden="true"></span>
+              <span class="gap-item__text">{{ gap }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="results-section">
+      <h2 class="results-section__title">
+        <span class="results-section__title-icon" aria-hidden="true">◆</span>
+        Alternative Pathway
+      </h2>
+      <p class="results-section__subtitle">
+        An outside-the-box recommendation based on your latent skills.
+      </p>
+
+      <div class="card card--glow pivot-card">
+        <div class="pivot-card__header">
+          <div>
+            <span class="pivot-card__eyebrow">Pivot target</span>
+            <h3 class="pivot-card__role">
+              {{ evaluation.alternative_pathway.target_role }}
+            </h3>
+          </div>
+          <span
+            class="badge badge--{{ 'success' if 'Low' in evaluation.alternative_pathway.effort_level else 'warning' if 'Medium' in evaluation.alternative_pathway.effort_level else 'danger' }}"
+          >
+            {{ evaluation.alternative_pathway.effort_level }}
+          </span>
+        </div>
+        <p class="pivot-card__strategy">
+          {{ evaluation.alternative_pathway.pivot_strategy }}
+        </p>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="results-section">
+      <h2 class="results-section__title">
+        <span class="results-section__title-icon" aria-hidden="true">→</span>
+        Immediate Milestones
+      </h2>
+      <p class="results-section__subtitle">
+        Four specific tasks - do them in order, starting today.
+      </p>
+
+      <ol class="roadmap" aria-label="Immediate milestones">
+        {% for milestone in evaluation.immediate_milestones %}
+        <li class="roadmap__step">
+          <div class="roadmap__marker" aria-hidden="true">{{ loop.index }}</div>
+          <div class="roadmap__content">
+            <span class="roadmap__week">Step {{ loop.index }}</span>
+            <p class="roadmap__task">{{ milestone }}</p>
+          </div>
+        </li>
+        {% endfor %}
+      </ol>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="results-section results-vision">
+      <div class="vision-card">
+        <span class="vision-card__label">2-3 Year Vision</span>
+        <p class="vision-card__text">{{ evaluation.long_term_vision }}</p>
+      </div>
+    </section>
+
+    <section class="results-cta">
+      <div class="results-cta__inner card card--glow">
+        <div class="results-cta__text">
+          <h2 class="results-cta__title">Your portfolio is ready</h2>
+          <p class="results-cta__subtitle">
+            We've generated a portfolio website from your CV. Preview it, share
+            it, get hired.
+          </p>
+        </div>
+        <a
+          href="{{ url_for('preview.preview_portfolio', session_id=session_id) }}"
+          class="btn btn--primary btn--lg"
+        >
+          Preview your portfolio →
+        </a>
+      </div>
+    </section>
+  </div>
+</div>
 {% endblock %}

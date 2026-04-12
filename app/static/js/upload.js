@@ -75,3 +75,47 @@
     form.submit();
   });
 })();
+
+// --- Filename display ---
+const cvInput = document.getElementById("cv");
+const dropzone = document.getElementById("upload-dropzone");
+const labelEl = document.getElementById("upload-dropzone-label");
+const typesEl = document.getElementById("upload-dropzone-types");
+
+cvInput.addEventListener("change", function () {
+  if (this.files && this.files.length > 0) {
+    const name = this.files[0].name;
+    dropzone.classList.add("upload-dropzone--selected");
+    labelEl.textContent = name;
+    typesEl.textContent = "File selected - click to change";
+  } else {
+    dropzone.classList.remove("upload-dropzone--selected");
+    labelEl.textContent = "Click to browse or drag and drop";
+    typesEl.textContent = "PDF or DOCX accepted";
+  }
+});
+
+// --- Lock navbar while processing ---
+// Watches for the loading overlay becoming visible and disables all nav links
+const loadingEl = document.getElementById("upload-loading");
+const navLinks = document.querySelectorAll("#main-navbar .navbar__link");
+
+const observer = new MutationObserver(function () {
+  const isLoading = !loadingEl.hidden;
+  navLinks.forEach(function (link) {
+    if (isLoading) {
+      link.setAttribute("data-href", link.getAttribute("href"));
+      link.removeAttribute("href");
+      link.setAttribute("aria-disabled", "true");
+    } else {
+      const saved = link.getAttribute("data-href");
+      if (saved) {
+        link.setAttribute("href", saved);
+        link.removeAttribute("data-href");
+      }
+      link.removeAttribute("aria-disabled");
+    }
+  });
+});
+
+observer.observe(loadingEl, { attributes: true, attributeFilter: ["hidden"] });

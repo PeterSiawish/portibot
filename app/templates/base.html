@@ -11,12 +11,46 @@
     />
     <link
       rel="stylesheet"
-      href="{{url_for('static', filename='css/base.css')}}"
+      href="{{ url_for('static', filename='css/base.css') }}"
     />
-    <title>{% block title %}{% endblock %}</title>
     {% block head %}{% endblock %}
+    <title>{% block title %}Portibot{% endblock %}</title>
   </head>
-  <body>
-    {% block body %}{% endblock %}
+  <body class="page--{% block body_class %}default{% endblock %}">
+    <nav class="navbar" id="main-navbar">
+      <div class="container navbar__inner">
+        <a
+          href="{{ url_for('home.index') }}"
+          class="navbar__brand navbar__link"
+        >
+          <span class="navbar__brand-porti">Porti</span>
+          <span class="navbar__brand-bot">bot</span>
+        </a>
+        <ul class="navbar__links">
+          <li>
+            <a href="{{ url_for('home.index') }} " class="navbar__link">Home</a>
+          </li>
+          <li class="navbar__cta">
+            <a
+              href="{{ url_for('upload.upload_page') }}"
+              class="btn btn--secondary navbar__link"
+              style="padding: 6px 16px; font-size: 0.85rem"
+            >
+              Get Started
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main>{% block body %}{% endblock %}</main>
+
+    {% block footer %}
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2026 Peter Siawish</p>
+      </div>
+    </footer>
+    {% endblock %}
   </body>
 </html>
