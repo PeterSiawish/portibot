@@ -81,6 +81,61 @@
   --transition-base: 250ms ease;
 }
 
+/* LIGHT MODE TOKENS, Applied when <html data-theme="light">. */
+[data-theme="light"] {
+  /* Backgrounds */
+  --bg-page: #f0f4f8;
+  --bg-surface: #e2eaf0;
+  --bg-card: #ffffff;
+  --bg-raised: #ebf2f7;
+  --bg-hover: #d6e4ee;
+
+  /* Accents */
+  --accent: #0284c7;
+  --accent-dim: #0369a1;
+  --accent-subtle: rgba(2, 132, 199, 0.1);
+  --accent-glow: rgba(2, 132, 199, 0.18);
+
+  /* Text */
+  --text-primary: #0c1a26;
+  --text-secondary: #2d5068;
+  --text-muted: #6b90a8;
+  --text-on-accent: #ffffff;
+
+  /* Borders */
+  --border-subtle: rgba(0, 60, 100, 0.1);
+  --border-default: rgba(0, 60, 100, 0.18);
+  --border-strong: rgba(0, 60, 100, 0.35);
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-raised: 0 4px 24px rgba(0, 0, 0, 0.12);
+  --shadow-glow: 0 0 24px rgba(2, 132, 199, 0.12);
+
+  /* Semantic colours */
+  --color-success: #059669;
+  --color-success-subtle: rgba(5, 150, 105, 0.08);
+  --color-warning: #b45309;
+  --color-warning-subtle: rgba(180, 83, 9, 0.08);
+  --color-danger: #dc2626;
+  --color-danger-subtle: rgba(220, 38, 38, 0.08);
+}
+
+/* Navbar background adjusts in light mode since it uses a
+   hardcoded rgba value rather than a token */
+[data-theme="light"] .navbar {
+  background-color: rgba(240, 244, 248, 0.9);
+}
+
+/* Body dot-grid overlay: flip to dark dots on light background */
+[data-theme="light"] body::before {
+  background-image: radial-gradient(
+    circle,
+    rgba(0, 60, 100, 0.06) 1px,
+    transparent 1px
+  );
+}
+
 /* Reset */
 *,
 *::before,
@@ -443,4 +498,42 @@ p {
 /* Hide navbar entirely on the preview page */
 .page--preview .navbar {
   display: none;
+}
+
+/* THEME TOGGLE BUTTON */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.theme-toggle:hover {
+  border-color: var(--border-default);
+  color: var(--text-primary);
+  background-color: var(--accent-subtle);
+}
+
+/* Show moon in dark mode, sun in light mode */
+[data-theme="dark"] .theme-toggle__sun {
+  display: none;
+}
+[data-theme="dark"] .theme-toggle__moon {
+  display: block;
+}
+[data-theme="light"] .theme-toggle__moon {
+  display: none;
+}
+[data-theme="light"] .theme-toggle__sun {
+  display: block;
 }
