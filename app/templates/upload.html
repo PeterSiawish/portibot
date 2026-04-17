@@ -106,6 +106,20 @@ body_class %}upload{% endblock %} {% block head %}
         </div>
       </div>
 
+      <label class="upload-consent">
+        <input
+          type="checkbox"
+          class="upload-consent__checkbox"
+          name="consent"
+          value="true"
+          required
+        />
+        <span class="upload-consent__text">
+          I understand my CV and name will be processed using AI to generate my
+          results. No personal data is stored after my session ends.
+        </span>
+      </label>
+
       <p
         id="upload-client-error"
         class="upload-form__error"

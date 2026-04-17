@@ -22,6 +22,12 @@ def upload_page():
     if request.method == "POST":
         file = request.files.get("cv")
         role = request.form.get("role")
+        consent = request.form.get("consent")
+
+        if consent != "true":
+            return render_template(
+                "error.html", message="You must consent to the terms and conditions."
+            )
 
         is_valid, message = validate_file(file)
 

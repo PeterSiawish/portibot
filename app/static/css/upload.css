@@ -262,3 +262,35 @@ body.upload-loading--active {
   border-color: var(--color-danger);
   color: var(--color-danger);
 }
+
+/* CONSENT CHECKBOX */
+.upload-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  cursor: pointer;
+  padding: var(--space-4);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast);
+}
+
+.upload-consent:hover {
+  border-color: var(--border-default);
+}
+
+.upload-consent__checkbox {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.upload-consent__text {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}

@@ -76,7 +76,7 @@
   });
 })();
 
-// --- Filename display ---
+// Filename display
 const cvInput = document.getElementById("cv");
 const dropzone = document.getElementById("upload-dropzone");
 const labelEl = document.getElementById("upload-dropzone-label");
@@ -95,7 +95,7 @@ cvInput.addEventListener("change", function () {
   }
 });
 
-// --- Lock navbar while processing ---
+// Lock navbar while processing
 // Watches for the loading overlay becoming visible and disables all nav links
 const loadingEl = document.getElementById("upload-loading");
 const navLinks = document.querySelectorAll("#main-navbar .navbar__link");
