@@ -29,6 +29,9 @@ def upload_page():
                 "error.html", message="You must consent to the terms and conditions."
             )
 
+        if not role:
+            return render_template("error.html", message="Invalid job role selected.")
+
         is_valid, message = validate_file(file)
 
         if not is_valid:
