@@ -36,7 +36,7 @@ class AutoEvaluationSchema(BaseModel):
     # Overall Picture
     technical_archetype: str = Field(
         description=(
-            "A formal, industry-standard professional title based on the candidate's core expertise. Examples: 'Junior Backend Engineer', 'Full-Stack Developer', 'Machine Learning Research Intern', or 'Software Engineer (DevOps focus)'. Avoid flowery language or creative metaphors."
+            "A formal, two-four word, industry-standard professional title based on the candidate's core expertise. AVOID role-specific terms like backend, fullstack, etc."
         )
     )
     executive_summary: str = Field(

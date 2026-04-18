@@ -4,6 +4,7 @@ from google.genai.types import HttpOptions
 from sentence_transformers import SentenceTransformer
 
 from app.services.job_embedding_cache import preload_jobs
+from app.utilities.session_db import init_db, close_db
 
 # Import all blueprints
 from app.routes.home import home
@@ -24,6 +25,9 @@ def create_app():
 
     with app.app_context():
         preload_jobs(app, app.embedding_model)
+
+        init_db()
+        app.teardown_appcontext(close_db)
 
     app.register_blueprint(home)
     app.register_blueprint(upload)

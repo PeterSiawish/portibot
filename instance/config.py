@@ -30,3 +30,5 @@ UPLOAD_FOLDER = os.path.join(INSTANCE_DIR, "cv_uploads")
 EMBEDDING_MODEL_PATH = os.path.join(ROOT_DIR, "embedding_model")
 
 JOB_DATA_DIR = os.path.join(ROOT_DIR, "job_data")
+
+DATABASE = os.path.join(INSTANCE_DIR, "session.db")

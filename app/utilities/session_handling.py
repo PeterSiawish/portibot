@@ -1,49 +1,55 @@
-import uuid
+import uuid, json
 from datetime import datetime, timedelta
-import threading
+from app.utilities.session_db import get_db
 
-TEMP_STORAGE = {}
 EXPIRY_TIME = timedelta(minutes=30)
-storage_lock = threading.Lock()
 
 
 def create_session(data):
     cleanup_expired_sessions()
-    session_id = str(uuid.uuid4())
 
-    with storage_lock:
-        TEMP_STORAGE[session_id] = {"data": data, "created_at": datetime.now()}
+    session_id = str(uuid.uuid4())
+    db = get_db()
+
+    db.execute(
+        "INSERT INTO sessions (session_id, data, created_at) VALUES (?, ?, ?)",
+        (session_id, json.dumps(data), datetime.now().isoformat()),
+    )
+    db.commit()
 
     return session_id
 
 
 def get_session(session_id):
-    with storage_lock:
-        session = TEMP_STORAGE.get(session_id)
+    cleanup_expired_sessions()
+    db = get_db()
 
-        if not session:
-            return None
+    row = db.execute(
+        "SELECT data, created_at FROM sessions WHERE session_id = ?", (session_id,)
+    ).fetchone()
 
-        if datetime.now() - session["created_at"] > EXPIRY_TIME:
-            TEMP_STORAGE.pop(session_id, None)
-            return None
+    if not row:
+        return None
 
-    return session["data"]
+    created_at = datetime.fromisoformat(row["created_at"])
+
+    if datetime.now() - created_at >= EXPIRY_TIME:
+        delete_session(session_id)
+        return None
+
+    return json.loads(row["data"])
 
 
 def delete_session(session_id):
-    with storage_lock:
-        TEMP_STORAGE.pop(session_id, None)
+    db = get_db()
+    db.execute("DELETE FROM sessions WHERE session_id = ?", (session_id,))
+    db.commit()
 
 
 def cleanup_expired_sessions():
-    with storage_lock:
-        now = datetime.now()
-        expired = [
-            sid
-            for sid, s in TEMP_STORAGE.items()
-            if now - s["created_at"] > EXPIRY_TIME
-        ]
+    db = get_db()
 
-        for sid in expired:
-            TEMP_STORAGE.pop(sid, None)
+    # This deletes anything where created_at is 30 minutes ago or older
+    limit = (datetime.now() - EXPIRY_TIME).isoformat()
+    db.execute("DELETE FROM sessions WHERE created_at <= ?", (limit,))
+    db.commit()
