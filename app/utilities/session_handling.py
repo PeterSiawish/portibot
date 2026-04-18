@@ -1,5 +1,5 @@
 import uuid, json
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from app.utilities.session_db import get_db
 
 EXPIRY_TIME = timedelta(minutes=30)
@@ -13,7 +13,7 @@ def create_session(data):
 
     db.execute(
         "INSERT INTO sessions (session_id, data, created_at) VALUES (?, ?, ?)",
-        (session_id, json.dumps(data), datetime.now().isoformat()),
+        (session_id, json.dumps(data), datetime.now(timezone.utc).isoformat()),
     )
     db.commit()
 
@@ -32,7 +32,7 @@ def get_session(session_id):
 
     created_at = datetime.fromisoformat(row["created_at"])
 
-    if datetime.now() - created_at >= EXPIRY_TIME:
+    if datetime.now(timezone.utc) - created_at > EXPIRY_TIME:
         delete_session(session_id)
         return None
 
@@ -49,6 +49,6 @@ def cleanup_expired_sessions():
     db = get_db()
 
     # This deletes anything where created_at is 30 minutes ago or older
-    limit = (datetime.now() - EXPIRY_TIME).isoformat()
-    db.execute("DELETE FROM sessions WHERE created_at <= ?", (limit,))
+    limit = (datetime.now(timezone.utc) - EXPIRY_TIME).isoformat()
+    db.execute("DELETE FROM sessions WHERE created_at < ?", (limit,))
     db.commit()

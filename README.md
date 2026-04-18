@@ -10,7 +10,7 @@ Final-year project: a web application that helps computing graduates understand 
 - **Target roles** — Backend, frontend, full stack, game development, data science, AI/ML, DevOps, mobile, or **auto-detect** (recommendations across roles).
 - **AI evaluation** — Gemini turns comparison results into readable feedback (role-specific or auto-match views).
 - **Portfolio preview** — Generates HTML for a personal portfolio from the CV; preview in the browser and download as a file.
-- **Sessions** — Results are stored in memory for **30 minutes** (see `app/utilities/session_handling.py`); there is no user database.
+- **Sessions** — Results are stored in a local SQLite database for **30 minutes** (see `app/utilities/session_handling.py`); there is no user database.
 
 ## Tech stack
 
@@ -112,7 +112,7 @@ The preload function already receives `app` explicitly and reads `app.config`, w
 
 ## Limitations (for markers and future work)
 
-- In-memory sessions expire and do not survive server restarts.
+- Sessions are stored in a local SQLite database and expire after 30 minutes.
 - Uploaded files are deleted after processing; there is no long-term CV storage.
 - Job profiles are static JSON, not live job listings.
 - Rate limits and costs apply to the Gemini API in production use.

@@ -6,7 +6,6 @@ def get_db():
     if "db" not in g:
         g.db = sqlite3.connect(current_app.config["DATABASE"], timeout=30)
         g.db.row_factory = sqlite3.Row  # allows dict-like access
-        g.db.execute("PRAGMA journal_mode=WAL;")
     return g.db
 
 
@@ -18,6 +17,9 @@ def close_db(e=None):
 
 def init_db():
     db = get_db()
+
+    g.db.execute("PRAGMA journal_mode=WAL;")
+
     db.execute(
         """
         CREATE TABLE IF NOT EXISTS sessions (

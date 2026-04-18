@@ -23,11 +23,12 @@ def create_app():
     )
     app.embedding_model = SentenceTransformer(app.config.get("EMBEDDING_MODEL_PATH"))
 
+    app.teardown_appcontext(close_db)
+
     with app.app_context():
         preload_jobs(app, app.embedding_model)
 
         init_db()
-        app.teardown_appcontext(close_db)
 
     app.register_blueprint(home)
     app.register_blueprint(upload)
