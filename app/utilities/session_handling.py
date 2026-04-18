@@ -21,7 +21,6 @@ def create_session(data):
 
 
 def get_session(session_id):
-    cleanup_expired_sessions()
     db = get_db()
 
     row = db.execute(

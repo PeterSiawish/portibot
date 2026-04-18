@@ -11,7 +11,7 @@ def preview_portfolio(session_id):
     data = get_session(session_id)
 
     if not data:
-        return render_template("error.html", message="Session Expired.")
+        return render_template("error.html", message="Invalid or Expired Session.")
 
     return render_template("preview_portfolio.html", session_id=session_id)
 
@@ -21,7 +21,7 @@ def portfolio_endpoint(session_id):
     data = get_session(session_id)
 
     if not data:
-        return render_template("error.html", message="Invalid Session.")
+        return render_template("error.html", message="Invalid or Expired Session.")
 
     website = data.get("website")
     html = website.get("html_code")
@@ -37,7 +37,7 @@ def download_portfolio(session_id):
     data = get_session(session_id)
 
     if not data:
-        return render_template("error.html", message="Invalid Session.")
+        return render_template("error.html", message="Invalid or Expired Session.")
 
     html = data.get("website", {}).get("html_code")
 

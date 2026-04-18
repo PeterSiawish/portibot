@@ -10,9 +10,9 @@ def show_results(session_id):
     data = get_session(session_id)
 
     if not data:
-        return render_template("error.html", message="Session Expired.")
+        return render_template("error.html", message="Invalid or Expired Session.")
 
-    if data["role"] == "auto":
+    if data.get("role") == "auto":
         return render_template(
             "results_auto.html",
             evaluation=data["evaluation"],
