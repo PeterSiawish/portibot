@@ -18,5 +18,8 @@ __pycache__/
 .env
 *.env
 
-# Ignore temporary file uploads
-cv_uploads/
+# Ignore everything in the instance folder by default
+instance/*
+
+# Allow git to track the config logic
+!instance/config.py
