@@ -41,7 +41,8 @@ body_class %}results{% endblock %} {% block head %}
       </p>
 
       <div class="rankings-list">
-        {% for role in evaluation.top_competency_rankings %}
+        {% for role in evaluation.top_competency_rankings |
+        sort(attribute='score', reverse=true) %}
         <div class="ranking-card card">
           <div class="ranking-card__header">
             <div class="ranking-card__meta">

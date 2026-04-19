@@ -45,10 +45,10 @@ class AutoEvaluationSchema(BaseModel):
 
     # Comparative Analysis
     best_fit_role: str = Field(
-        description="The role with the highest semantic and technical alignment."
+        description="The role with the highest semantic and technical alignment. ENSURE this is natural and human-readable"
     )
     top_competency_rankings: List[RoleComparison] = Field(
-        description="A detailed breakdown of the top 3-4 roles to show the candidate their options."
+        description="A detailed breakdown of the top 4 roles to show the candidate their options."
     )
 
     # Strategic Growth

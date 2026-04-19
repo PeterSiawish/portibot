@@ -95,9 +95,9 @@ def full_comparison(cv_data, cv_embeddings, job_data, job_embeddings, role):
     ]
 
     WEIGHTS = {
-        "languages": 0.15,
-        "frameworks": 0.15,
-        "concepts": 0.225,
+        "languages": 0.175,
+        "frameworks": 0.175,
+        "concepts": 0.175,
         "libraries": 0.075,
         "databases": 0.10,
         "tools_platforms": 0.10,
