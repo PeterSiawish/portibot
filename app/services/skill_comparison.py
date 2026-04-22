@@ -75,7 +75,7 @@ def full_comparison(cv_data, cv_embeddings, job_data, job_embeddings, role):
     """
 
     results = {
-        "name": cv_data["name"],
+        "first_name": cv_data["first_name"],
         "role": role,
         "overall_score": 0,
         "category_scores": {},

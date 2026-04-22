@@ -66,10 +66,9 @@ def upload_page():
                 results = run_auto_match(
                     cv_data, embedded_cv_data, JOB_DATA, JOB_EMBEDDINGS
                 )
-
                 evaluation = evaluate_auto(results, gemini_client)
 
-            website = generate_portfolio(text, gemini_client)
+            website = generate_portfolio(cv_data, gemini_client)
 
             session_data = {"evaluation": evaluation, "website": website, "role": role}
 

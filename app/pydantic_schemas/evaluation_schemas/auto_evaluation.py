@@ -11,7 +11,7 @@ class RoleComparison(BaseModel):
         description="A 2-sentence explanation of why the candidate fits or struggles with this specific role."
     )
     key_overlap: List[str] = Field(
-        description="The top 3 skills the candidate possesses that are most relevant to THIS role."
+        description="The top 3 skills the candidate possesses that are most relevant to THIS role. Leave empty if no relevant skills are present."
     )
     primary_blocker: str = Field(
         description="The single most significant missing skill or experience preventing a higher score."
@@ -53,7 +53,7 @@ class AutoEvaluationSchema(BaseModel):
 
     # Strategic Growth
     skill_synergy: str = Field(
-        description="Explain which skills are 'transferable' across multiple roles they scored well in."
+        description="Explain which skills are 'transferable' across multiple roles they scored well in. Leave empty if no clear synergies exist."
     )
     market_readiness_gap: List[str] = Field(
         description="A list of 3 high-level industry 'soft' requirements missing (e.g., 'Cloud Deployment', 'Unit Testing', 'Documentation')."

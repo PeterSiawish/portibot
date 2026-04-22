@@ -4,8 +4,8 @@ from .profile_base import TechnicalSkills
 
 
 class CVProfile(BaseModel):
-    name: str = Field(
-        description="The full name of the CV owner.",
+    first_name: str = Field(
+        description="The first name of the CV owner.",
     )
     technical_skills: TechnicalSkills
     soft_skills: List[str] = Field(
@@ -21,4 +21,16 @@ class CVProfile(BaseModel):
     responsibilities: List[str] = Field(
         default_factory=list,
         description="Detailed bullet points describing work history, duties, and achievements.",
+    )
+    education: List[str] = Field(
+        default_factory=list,
+        description="Educational background details, including degrees, institutions, and graduation years.",
+    )
+    internships: List[str] = Field(
+        default_factory=list,
+        description="Internship experiences, if any, with necessary details.",
+    )
+    projects: List[str] = Field(
+        default_factory=list,
+        description="Notable projects, including personal, academic, or open-source contributions.",
     )

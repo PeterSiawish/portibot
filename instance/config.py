@@ -22,7 +22,7 @@ GEMINI_RETRY_CONFIG = HttpRetryOptions(
 )
 
 # Flask Settings
-DEBUG = False
+DEBUG = True
 
 # Paths for important resources
 INSTANCE_DIR = os.path.abspath(os.path.dirname(__file__))

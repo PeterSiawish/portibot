@@ -14,6 +14,7 @@ STRICT RULES:
 2. Follow the schema EXACTLY
 3. The HTML must be complete and functional
 4. Do NOT use Em Dashes
+5. If fields are missing in the input, use placeholders in the output (e.g., "Skills not provided")
 
 DESIGN QUALITY:
 - Modern, clean UI

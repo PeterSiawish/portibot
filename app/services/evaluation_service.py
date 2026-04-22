@@ -10,6 +10,8 @@ system_instructions = """
 
     Only use the provided data. Do not assume skills, experience, or technologies not present in the input.
     
+    If the CV evaluation data contains numerous missing skills, do NOT make up skills to fill gaps. Empty fields should be left as empty lists or strings.
+
     You must:
     - Greet them briefly and speak directly to them, as if it were a real, one-on-one interaction
     - Be specific and avoid generic advice
@@ -42,7 +44,7 @@ def evaluate_role(results, client):
     - providing a prioritised, actionable improvement plan
 
     Your goal is to be a "Brutally Honest Mentor." 
-    - Don't sugarcoat the gaps; explain them in terms of "Hiring Risk."
+    - Don't sugarcoat the gaps; explain them in terms of "Hiring Risk".
     - Use industry-standard terminology (e.g., "Technical Debt," "Scalability," "CI/CD Pipeline").
     - When suggesting the 'bridge_project', make it something they can actually finish in a weekend.
 
@@ -77,6 +79,7 @@ def evaluate_auto(results, client):
     - Be extremely specific about technology stacks.
     - In 'technical_archetype', be creative but accurate.
     - For 'effort_level', be realistic based on the 'primary_blocker'.
+    - If any field is missing or empty in the input data, keep it empty in the output. Do not make assumptions or fill gaps with fabricated information.
 
     Return the response strictly following the JSON schema.
     """
