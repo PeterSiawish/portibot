@@ -1,13 +1,12 @@
-import uuid, json
+import uuid, json, sqlite3
 from datetime import datetime, timedelta, timezone
 from app.utilities.session_db import get_db
+from flask import current_app
 
 EXPIRY_TIME = timedelta(minutes=30)
 
 
 def create_session(data):
-    cleanup_expired_sessions()
-
     session_id = str(uuid.uuid4())
     db = get_db()
 
@@ -46,9 +45,14 @@ def delete_session(session_id):
 
 
 def cleanup_expired_sessions():
-    db = get_db()
+    db = sqlite3.connect(current_app.config["DATABASE"], timeout=30)
+    db.execute("PRAGMA journal_mode=WAL;")
 
     # This deletes anything where created_at is 30 minutes ago or older
     limit = (datetime.now(timezone.utc) - EXPIRY_TIME).isoformat()
-    db.execute("DELETE FROM sessions WHERE created_at < ?", (limit,))
-    db.commit()
+
+    try:
+        db.execute("DELETE FROM sessions WHERE created_at < ?", (limit,))
+        db.commit()
+    finally:
+        db.close()

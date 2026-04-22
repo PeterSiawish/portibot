@@ -8,6 +8,9 @@ load_dotenv()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 SECRET_KEY = os.getenv("SECRET_KEY")
 
+# Disables the /scheduler REST API endpoint for security reasons
+SCHEDULER_API_ENABLED = False
+
 # Gemini API Retry Configuration
 GEMINI_RETRY_CONFIG = HttpRetryOptions(
     attempts=4,
@@ -19,7 +22,7 @@ GEMINI_RETRY_CONFIG = HttpRetryOptions(
 )
 
 # Flask Settings
-DEBUG = True
+DEBUG = False
 
 # Paths for important resources
 INSTANCE_DIR = os.path.abspath(os.path.dirname(__file__))

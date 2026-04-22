@@ -11,7 +11,7 @@ system_instructions = """
     Only use the provided data. Do not assume skills, experience, or technologies not present in the input.
     
     You must:
-    - Speak directly to them, as if it were a real, one-on-one interaction
+    - Greet them briefly and speak directly to them, as if it were a real, one-on-one interaction
     - Be specific and avoid generic advice
     - Prioritise the most important improvements
     - Explain WHY something matters in the industry

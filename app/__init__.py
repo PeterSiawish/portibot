@@ -2,15 +2,20 @@ from flask import Flask
 from google import genai
 from google.genai.types import HttpOptions
 from sentence_transformers import SentenceTransformer
+from flask_apscheduler import APScheduler
 
 from app.services.job_embedding_cache import preload_jobs
 from app.utilities.session_db import init_db, close_db
+from app.utilities.session_handling import cleanup_expired_sessions
 
 # Import all blueprints
 from app.routes.home import home
 from app.routes.upload import upload
 from app.routes.results import results
 from app.routes.preview import preview
+
+# Initialize the scheduler for session cleanup
+scheduler = APScheduler()
 
 
 def create_app():
@@ -34,5 +39,21 @@ def create_app():
     app.register_blueprint(upload)
     app.register_blueprint(results)
     app.register_blueprint(preview)
+
+    # Ensure scheduler runs in app context
+    def scheduled_cleanup():
+        with app.app_context():
+            cleanup_expired_sessions()
+
+    scheduler.init_app(app)
+    scheduler.add_job(
+        id="session_cleanup",
+        func=scheduled_cleanup,
+        trigger="interval",
+        minutes=10,
+        replace_existing=True,
+    )
+
+    scheduler.start()
 
     return app
