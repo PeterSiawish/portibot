@@ -69,13 +69,13 @@ def compare_category(cv_embeddings, job_embeddings, cv_list, job_list, category)
     return avg_score, cat_results
 
 
-def full_comparison(cv_data, cv_embeddings, job_data, job_embeddings, role):
+def full_comparison(cv_data, cv_embeddings, job_data, job_embeddings, role, first_name):
     """
     Orchestrates the full comparison between CV and Job Description JSONs.
     """
 
     results = {
-        "first_name": cv_data["first_name"],
+        "first_name": first_name,
         "role": role,
         "overall_score": 0,
         "category_scores": {},

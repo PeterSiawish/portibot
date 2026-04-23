@@ -11,6 +11,7 @@ from app.services.auto_service import run_auto_match
 from app.services.cv_embedding import embed_cv_data
 from app.services.evaluation_service import evaluate_role, evaluate_auto
 from app.services.portfolio_generation import generate_portfolio
+from app.services.hide_pii import redact_cv
 
 from app.services.job_embedding_cache import JOB_DATA, JOB_EMBEDDINGS
 
@@ -40,16 +41,24 @@ def upload_page():
         file_path = save_file(file)
         try:
             text = extract_text(file_path)
+
             if text is None:
                 return render_template(
                     "error.html",
                     message="Unsupported file type after upload. Use PDF or DOCX.",
                 )
 
+            # Redact PII from the CV text
+            text, first_name = redact_cv(
+                text, current_app.analyzer, current_app.anonymizer
+            )
+
+            # Basic text cleaning
             text = clean_text(text)
 
             gemini_client = current_app.gemini_client
             cv_data = extract_skills(text, gemini_client)
+            cv_data["first_name"] = first_name
 
             embedded_cv_data = embed_cv_data(cv_data, model=current_app.embedding_model)
 
@@ -58,13 +67,18 @@ def upload_page():
                 job_data = JOB_DATA[role]
 
                 results = full_comparison(
-                    cv_data, embedded_cv_data, job_data, embedded_job_data, role
+                    cv_data,
+                    embedded_cv_data,
+                    job_data,
+                    embedded_job_data,
+                    role,
+                    first_name,
                 )
 
                 evaluation = evaluate_role(results, gemini_client)
             else:
                 results = run_auto_match(
-                    cv_data, embedded_cv_data, JOB_DATA, JOB_EMBEDDINGS
+                    cv_data, embedded_cv_data, JOB_DATA, JOB_EMBEDDINGS, first_name
                 )
                 evaluation = evaluate_auto(results, gemini_client)
 

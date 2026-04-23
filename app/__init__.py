@@ -3,6 +3,8 @@ from google import genai
 from google.genai.types import HttpOptions
 from sentence_transformers import SentenceTransformer
 from flask_apscheduler import APScheduler
+from presidio_analyzer import AnalyzerEngine
+from presidio_anonymizer import AnonymizerEngine
 
 from app.services.job_embedding_cache import preload_jobs
 from app.utilities.session_db import init_db, close_db
@@ -27,6 +29,9 @@ def create_app():
         http_options=HttpOptions(retry_options=app.config.get("GEMINI_RETRY_CONFIG")),
     )
     app.embedding_model = SentenceTransformer(app.config.get("EMBEDDING_MODEL_PATH"))
+
+    app.analyzer = AnalyzerEngine()
+    app.anonymizer = AnonymizerEngine()
 
     app.teardown_appcontext(close_db)
 

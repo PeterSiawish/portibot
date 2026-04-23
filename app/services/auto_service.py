@@ -1,7 +1,7 @@
 from app.services.skill_comparison import full_comparison
 
 
-def run_auto_match(cv_data, cv_embeddings, job_data, job_embeddings):
+def run_auto_match(cv_data, cv_embeddings, job_data, job_embeddings, first_name):
     results = []
 
     for role in job_data.keys():
@@ -13,7 +13,7 @@ def run_auto_match(cv_data, cv_embeddings, job_data, job_embeddings):
 
         # Run the existing comparison
         comparison = full_comparison(
-            cv_data, cv_embeddings, role_data, role_data_embedding, role
+            cv_data, cv_embeddings, role_data, role_data_embedding, role, first_name
         )
 
         results.append(
