@@ -7,10 +7,13 @@ def redact_cv(
     cv_text: str,
     analyzer: AnalyzerEngine,
     anonymizer: AnonymizerEngine,
-    header_lines: int = 12,
+    header_pct=0.25,
 ):
 
     lines = cv_text.splitlines(keepends=True)
+
+    header_lines = max(5, int(len(lines) * header_pct))
+
     header = "".join(lines[:header_lines])
     body = "".join(lines[header_lines:])
 
