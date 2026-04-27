@@ -42,10 +42,10 @@ def upload_page():
         try:
             text = extract_text(file_path)
 
-            if text is None:
+            if text is None or text.strip() == "":
                 return render_template(
                     "error.html",
-                    message="Unsupported file type after upload. Use PDF or DOCX.",
+                    message="Looks like your CV is empty or contains unsupported content. Please check your file and try again.",
                 )
 
             # Redact PII from the CV text
