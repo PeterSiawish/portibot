@@ -1,16 +1,17 @@
-# Graduate Employability Support App
+# PortiBot
 
 Final-year project: a web application that helps computing graduates understand how their CV lines up with common tech roles, using structured skill extraction, semantic similarity, and AI-generated feedback. Users upload a PDF or DOCX CV, choose a target role (or auto-detect), receive an evaluation, and get a simple portfolio page generated from their CV text.
 
 ## What it does
 
-- **CV upload** — Accepts PDF and DOCX; text is extracted and normalised.
+- **CV upload** — Accepts PDF and DOCX (max **5MB**); text is extracted and normalised.
+- **Privacy-first processing** — Uses Microsoft Presidio to redact PII from the **header** of the CV (name/email/phone/location/URL) while keeping the body intact so skills are not accidentally removed.
 - **Skill profiling** — Uses the Google Gemini API to pull structured skills and profile data from the CV.
 - **Role comparison** — Compares the CV against curated job profiles in `job_data/` using [Sentence Transformers](https://www.sbert.net/) embeddings (`all-MiniLM-L6-v2` in `embedding_model/`). Similarity is used to highlight gaps and strengths.
 - **Target roles** — Backend, frontend, full stack, game development, data science, AI/ML, DevOps, mobile, or **auto-detect** (recommendations across roles).
-- **AI evaluation** — Gemini turns comparison results into readable feedback (role-specific or auto-match views).
+- **AI evaluation** — Gemini (currently `gemini-2.5-flash-lite`) turns comparison results into readable feedback (role-specific or auto-match views).
 - **Portfolio preview** — Generates HTML for a personal portfolio from the CV; preview in the browser and download as a file.
-- **Sessions** — Results are stored in a local SQLite database for **30 minutes** (see `app/utilities/session_handling.py`); there is no user database.
+- **Sessions** — Results are stored in a local SQLite database (`instance/session.db`) for **30 minutes** and are cleaned up on a schedule (every ~10 minutes); there is no user database.
 
 ## Tech stack
 
@@ -32,16 +33,17 @@ Final-year project: a web application that helps computing graduates understand 
 │   ├── templates/ & static/
 │   └── utilities/           # upload validation, in-memory sessions
 ├── instance/config.py       # Paths, DEBUG, env-backed secrets
+├── instance/session.db      # Created at runtime (SQLite session storage)
+├── instance/cv_uploads/     # Created at runtime (temporary uploads)
 ├── job_data/                # One JSON file per role (skills, responsibilities)
 ├── embedding_model/         # Local SentenceTransformer weights (all-MiniLM-L6-v2)
-├── cv_uploads/              # Created at runtime for temporary uploads
 ├── run.py                   # Entry point: create_app() then app.run()
 └── requirements.txt
 ```
 
 ## Prerequisites
 
-- **Python 3.13+**
+- **Python 3.10+** (tested with **Python 3.13** on Windows)
 - A **Google Gemini API key** ([Google AI Studio](https://aistudio.google.com/)).
 - Enough disk/RAM for the sentence-transformers model (first load can take a short while).
 
@@ -62,6 +64,12 @@ PyTorch is pinned in `requirements.txt`; a CUDA build is optional if you want GP
    pip install -r requirements.txt
    ```
 
+   Presidio uses spaCy under the hood. While it should be installed via requirements.txt, install the large English model if you see a spaCy model error on first run:
+
+   ```bash
+   python -m spacy download en_core_web_lg
+   ```
+
 3. **Environment variables** — Create a `.env` file in the project root (same directory as `run.py`). `instance/config.py` loads it automatically:
 
    | Variable         | Purpose                                                   |
@@ -69,7 +77,14 @@ PyTorch is pinned in `requirements.txt`; a CUDA build is optional if you want GP
    | `GEMINI_API_KEY` | Required for Gemini calls                                 |
    | `SECRET_KEY`     | Flask secret key (sessions/signing if you extend the app) |
 
-4. **Embedding model** — `EMBEDDING_MODEL_PATH` in config points at `embedding_model/`, which should contain the local `all-MiniLM-L6-v2` model files. If the folder is empty, download the model from [Hugging Face](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) into that directory or change the path in `instance/config.py`.
+4. **Embedding model** — `EMBEDDING_MODEL_PATH` in config points at `embedding_model/`, which contains the local `all-MiniLM-L6-v2` model files (**committed via Git LFS**).
+
+   If you cloned the repo but the folder is missing weights (common when LFS wasn’t pulled), run:
+
+   ```bash
+   git lfs install
+   git lfs pull
+   ```
 
 5. **Job data** — Ensure `job_data/*.json` files exist for each role you expose in the upload form. Each file defines `technical_skills`, `soft_skills`, and `responsibilities` used for embedding and comparison.
 
