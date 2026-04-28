@@ -23,3 +23,6 @@ instance/*
 
 # Allow git to track the config logic
 !instance/config.py
+
+# Ignore test database fixture
+tests/fixtures/test_sessions.db

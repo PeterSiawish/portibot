@@ -12,6 +12,8 @@ class PortfolioGenerationSchema(BaseModel):
     - Must be fully functional when opened in a browser
     - DO NOT include markdown (e.g. ```html)
     - DO NOT include explanations
+    
+    If the candidate profile was empty or sparse, the HTML must contain only placeholder content, no invented skills or experience.
     """
     )
 
