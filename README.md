@@ -47,8 +47,6 @@ Final-year project: a web application that helps computing graduates understand 
 - A **Google Gemini API key** ([Google AI Studio](https://aistudio.google.com/)).
 - Enough disk/RAM for the sentence-transformers model (first load can take a short while).
 
-PyTorch is pinned in `requirements.txt`; a CUDA build is optional if you want GPU acceleration for encoding.
-
 ## Setup
 
 1. **Clone** the repository and create a virtual environment:
