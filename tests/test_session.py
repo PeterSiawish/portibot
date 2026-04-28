@@ -229,7 +229,7 @@ class TestDeleteSession:
     def test_delete_nonexistent_session_does_not_raise(self, app_context):
         """
         Deleting a session ID that does not exist must not raise
-        an exception — the operation should be idempotent.
+        an exception, the operation should be idempotent.
         """
         try:
             delete_session("nonexistent-id")
