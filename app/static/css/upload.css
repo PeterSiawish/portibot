@@ -106,6 +106,11 @@
   z-index: 1;
 }
 
+.upload-dropzone__warning {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
 .upload-dropzone__body {
   display: flex;
   flex-direction: column;
